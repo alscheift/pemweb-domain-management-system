@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id('id_notifikasi');
             $table->text('keterangan');
             $table->date('tanggal_notifikasi');
-            $table->timestamps();
 
-            $table->foreign('id_domain')->references('id_domain')->on('domains');
+            $table->timestamps();
         });
     }
 
@@ -26,10 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('notifications', function (Blueprint $table) {
-            $table->dropForeign(['id_domain']);
-        });
-
         Schema::dropIfExists('notifications');
     }
 };
