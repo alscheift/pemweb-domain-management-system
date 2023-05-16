@@ -44,6 +44,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('domains', function (Blueprint $table) {
+            $table->dropConstrainedForeignId('unit_id');
             $table->dropConstrainedForeignId('user_id');
         });
 
