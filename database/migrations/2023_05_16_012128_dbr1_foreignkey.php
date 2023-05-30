@@ -14,26 +14,26 @@ return new class extends Migration
         Schema::table('domains', function (Blueprint $table) {
             // Foreign Key ke Users('id_user')
             $table->foreignId('user_id')
-                ->constrained(table: 'users', column: 'id_user')
+                ->constrained(table: 'users')
                 ->onDelete('cascade');
 
             // Foreign Key ke Units('id_unit')
             $table->foreignId('unit_id')
-                ->constrained(table: 'units', column:   'id_unit')
+                ->constrained(table: 'units')
                 ->onDelete('cascade');
         });
 
         Schema::table('solutions', function (Blueprint $table) {
             // Foreign Key ke Notifications('id_notifikasi')
             $table->foreignId('notifikasi_id')
-                ->constrained(table: 'notifications', column: 'id_notifikasi')
+                ->constrained(table: 'notifications')
                 ->onDelete('cascade');
         });
 
         Schema::table('notifications', function (Blueprint $table) {
             // Foreign Key ke Domains('id_domain')
             $table->foreignId('domain_id')
-                ->constrained(table: 'domains', column: 'id_domain')
+                ->constrained(table: 'domains')
                 ->onDelete('cascade');
         });
     }

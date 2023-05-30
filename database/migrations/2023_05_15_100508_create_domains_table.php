@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('domains', function (Blueprint $table) {
-            $table->id('id_domain');
+            $table->id();
 
             $table->string('url');
             $table->string('nama');
@@ -24,7 +24,7 @@ return new class extends Migration
 
             $table->string('processor');
             $table->tinyInteger('jumlah_core_processor');
-            $table->string('ram',8);
+            $table->string('ram', 8);
 
             $table->string('jenis_server');
             $table->string('nama_server');
