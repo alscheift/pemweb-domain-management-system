@@ -1,4 +1,4 @@
-<x-layout>
+<x-template>
     <x-sidebar/>
-    <x-main-content/>
-</x-layout>
+    <x-layout/>
+</x-template>
