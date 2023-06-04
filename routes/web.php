@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('login', function () {
+    return view('sessions.create');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
