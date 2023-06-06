@@ -6,8 +6,11 @@
             <p> Selamat, datang {{ auth()->user()->nama }}</p>
 
 
-            @php($domains = auth()->user()->domains)
-
+            @can('admin')
+                @php($domains = \App\Models\Domain::all())
+            @else
+                @php($domains = auth()->user()->domains)
+            @endcan
 
             <section class="container px-4 mx-auto mt-10">
                 <div class="flex items-center gap-x-3">
@@ -75,7 +78,7 @@
                                         </th>
                                     </tr>
                                     </thead>
-                                    @foreach(auth()->user()->domains as $domain)
+                                    @foreach($domains as $domain)
                                         <tbody
                                             class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                                         <tr>
