@@ -14,14 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/laravel', function () {
+    return view('welcome.blade.php');
+});
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('dashboard.index');
+})->middleware('auth');
 
 
 // Login
-Route::get('login', [SessionsController::class, 'create']);
+Route::get('login', [SessionsController::class, 'create'])->name('login');
 Route::post('login', [SessionsController::class, 'store']);
 Route::post('logout', [SessionsController::class, 'destroy']);
 
