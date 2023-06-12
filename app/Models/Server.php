@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class DomainImages extends Model
+class Server extends Model
 {
     use HasFactory;
 
@@ -14,8 +15,13 @@ class DomainImages extends Model
         'id'
     ];
 
-    public function domain(): BelongsTo
+    public function domains(): HasMany
     {
-        return $this->belongsTo(Domain::class);
+        return $this->hasMany(Domain::class);
+    }
+
+    public function unit(): BelongsTo
+    {
+        return $this->belongsTo(Unit::class);
     }
 }

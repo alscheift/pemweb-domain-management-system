@@ -19,9 +19,14 @@ class Unit extends Model
         'id'
     ];
 
-    public function domains(): HasMany
+    public function servers(): HasMany
     {
-        return $this->hasMany(Domain::class);
+        return $this->hasMany(Server::class);
+    }
+
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class);
     }
 
 }
