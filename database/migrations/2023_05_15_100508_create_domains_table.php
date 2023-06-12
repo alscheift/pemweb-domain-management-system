@@ -14,12 +14,12 @@ return new class extends Migration {
             $table->id();
 
             $table->string('url');
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->string('application_type');
+            $table->string('application_type')->nullable();
 
-            $table->integer('port');
-            $table->integer('http_status');
+            $table->integer('port')->nullable();
+            $table->integer('http_status')->nullable();
 
             $table->timestamps();
         });
