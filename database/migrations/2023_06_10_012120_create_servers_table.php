@@ -14,7 +14,7 @@ return new class extends Migration {
         Schema::create('servers', function (Blueprint $table) {
 
             $table->id();
-            $table->string('nama');
+            $table->string('name');
             $table->string('server_type');
             $table->string('status');
             $table->ipAddress('ip_address');
