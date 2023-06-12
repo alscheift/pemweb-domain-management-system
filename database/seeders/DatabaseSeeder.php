@@ -67,7 +67,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $server1 = Server::create([
-            'nama' => 'webserverfmipa',
+            'name' => 'webserverfmipa',
             'server_type' => 'Fisik',
             'status' => 'Aktif',
             'ip_address' => '192.168.1.1',
@@ -78,7 +78,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $server2 = Server::create([
-            'nama' => 'mailserverfmipa',
+            'name' => 'mailserverfmipa',
             'server_type' => 'Virtual',
             'status' => 'Tidak Aktif',
             'ip_address' => '192.168.1.2',
@@ -89,7 +89,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $server3 = Server::create([
-            'nama' => 'webserverfk',
+            'name' => 'webserverfk',
             'server_type' => 'Fisik',
             'status' => 'Aktif',
             'ip_address' => '192.168.2.1',
@@ -100,7 +100,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $server4 = Server::create([
-            'nama' => 'mailserverfk',
+            'name' => 'mailserverfk',
             'server_type' => 'Virtual',
             'status' => 'Tidak Aktif',
             'ip_address' => '192.168.2.2',
