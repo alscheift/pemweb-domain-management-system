@@ -32,7 +32,7 @@ class SessionsController extends Controller
 
 
         session()->regenerate(); // session fixation
-        return redirect('/test')->with('success', 'Welcome Back!');
+        return redirect('/')->with('success', 'Welcome Back!');
     }
 
     public function destroy(): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
