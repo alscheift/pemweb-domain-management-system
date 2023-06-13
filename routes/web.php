@@ -1,6 +1,11 @@
 <?php
 
+use App\Http\Controllers\DomainController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ServerController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\UnitController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +25,8 @@ Route::get('/laravel', function () {
 
 Route::get('/', function () {
     return view('dashboard.index');
-})->middleware('auth');
+
+})->middleware('auth')->name('dashboard');
 
 
 // Login
@@ -29,3 +35,18 @@ Route::post('login', [SessionsController::class, 'store']);
 Route::post('logout', [SessionsController::class, 'destroy']);
 
 Route::get('test', [SessionsController::class, 'test']);
+
+// Units
+Route::get('/units', [UnitController::class, 'index'])->middleware('can:admin')->name('units');
+
+// Servers
+Route::get('/servers', [ServerController::class, 'index'])->middleware('can:admin')->name('servers');
+
+// Domains
+Route::get('/domains', [DomainController::class, 'index'])->middleware('auth')->name('domains');
+
+// Users
+Route::get('/users', [UserController::class, 'index'])->middleware('auth')->name('users');
+
+// Reports
+Route::get('/reports', [ReportController::class, 'index'])->middleware('auth')->name('reports');
