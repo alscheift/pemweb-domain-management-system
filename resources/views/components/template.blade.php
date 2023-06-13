@@ -7,6 +7,7 @@
     <title>Domain Management System
     </title>
     @vite('resources/css/app.css')
+    <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 <body class="h-full dark:bg-gray-900">
 
