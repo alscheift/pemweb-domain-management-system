@@ -51,7 +51,7 @@ Route::get('/users/create', [UserController::class, 'create'])->middleware('can:
 Route::post('/users', [UserController::class, 'store'])->middleware('can:admin')->name('users.store');
 Route::get('/users/{user}/edit', [UserController::class, 'edit'])->middleware('can:admin')->name('users.edit');
 Route::patch('/users/{user}', [UserController::class, 'update'])->middleware('can:admin')->name('users.update');
-Route::delete('/users/{user}', [UserController::class, 'destroy'])->middleware('can:admin')->name('users.delete');
+Route::delete('/users/{user}', [UserController::class, 'destroy'])->middleware('can:admin')->name('users.destroy');
 
 
 // Reports

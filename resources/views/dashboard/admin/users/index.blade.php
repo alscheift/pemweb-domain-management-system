@@ -72,18 +72,22 @@
                                                 </td>
                                                 <td class="px-4 py-4 text-sm whitespace-nowrap">
                                                     <div class="flex items-center gap-x-6">
-                                                        <a href="/users/{{$user->id}}/edit">
+                                                        <a href="/users/{{route('users.update',$user->getRouteKey())}}/edit">
                                                             <button
                                                                 class="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
                                                                 Update
                                                             </button>
 
                                                         </a>
-
-                                                        <button
-                                                            class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
-                                                            Delete
-                                                        </button>
+                                                        <form method="POST"
+                                                              action="{{route('users.destroy',$user->getRouteKey())}}">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button
+                                                                class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
+                                                                Delete
+                                                            </button>
+                                                        </form>
                                                     </div>
                                                 </td>
                                             </tr>
