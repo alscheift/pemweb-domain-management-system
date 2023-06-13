@@ -24,12 +24,7 @@ Route::get('/laravel', function () {
 });
 
 Route::get('/', function () {
-    if (auth()->user()?->is_admin) {
-        return view('dashboard.admin.index');
-    }
-    auth()->logout(); // sementara, sebelum ada user
-
-    return view('dashboard.users.index');
+    return view('dashboard.index');
 
 })->middleware('auth')->name('dashboard');
 
