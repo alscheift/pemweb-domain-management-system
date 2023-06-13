@@ -44,6 +44,9 @@ Route::get('/servers', [ServerController::class, 'index'])->middleware('can:admi
 
 // Domains
 Route::get('/domains', [DomainController::class, 'index'])->middleware('auth')->name('domains');
+Route::get('/domains/create', [DomainController::class, 'create'])->middleware('auth')->name('domains.create');
+Route::post('/domains', [DomainController::class, 'store'])->middleware('auth')->name('domains.store');
+
 
 // Users
 Route::get('/users', [UserController::class, 'index'])->middleware('auth')->name('users');
