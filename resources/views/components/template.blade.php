@@ -10,8 +10,12 @@
     <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 <body class="h-full dark:bg-gray-900">
-
+<section>
+    <x-flash/>
+</section>
 <div class="min-h-full">
+
+
     {{$slot}}
 </div>
 
