@@ -37,4 +37,31 @@ class UserController extends Controller
 
         return redirect(route('users'))->with('success', 'User berhasil ditambahkan');
     }
+
+    public function edit(User $user): View
+    {
+        return view('dashboard.admin.users.edit', compact('user'));
+    }
+
+    public function update(User $user): RedirectResponse
+    {
+        $attributes = request()->validate([
+            'username' => 'required',
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'unit_id' => ''
+        ]);
+
+        $user->update($attributes);
+
+        return redirect(route('users'))->with('success', 'User berhasil diupdate');
+    }
+
+    public function destroy(User $user): RedirectResponse
+    {
+        $user->delete();
+
+        return redirect(route('users'))->with('success', 'User berhasil dihapus');
+    }
 }
