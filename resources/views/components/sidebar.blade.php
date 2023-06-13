@@ -2,7 +2,13 @@
 @php
     function isActive($path)
     {
-        return request()->is($path) ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white';
+        $all = "group flex items-center px-2 py-2 text-sm font-medium rounded-md";
+        if(request()->route()->named($path)){
+            return "bg-gray-900 text-white"." ".$all;
+
+        }else {
+            return "text-gray-300 hover:bg-gray-700 hover:text-white"." ".$all;
+        }
     }
 @endphp
 
@@ -16,8 +22,7 @@
         <div class="flex flex-1 flex-col overflow-y-auto">
             <nav class="flex-1 space-y-1 px-2 py-4">
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                <a href="{{route('dashboard')}}"
-                   class="bg-gray-900 text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                <a href="{{route('dashboard')}}" class="{{isActive('dashboard')}}">
                     <!--
                       Heroicon name: outline/home
 
@@ -30,25 +35,21 @@
                     Dashboard
                 </a>
 
-                <a href="{{route('users')}}"
-                   class="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                <a href="{{route('users')}}" class="{{isActive('users')}}">
                     <div class="text-gray-400 group-hover:text-gray-300 mr-3 flex-shrink-0 h-6 w-6">
                         <x-svg name="users"/>
                     </div>
                     Users
                 </a>
 
-                <a href="{{route('units')}}"
-                   class="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                <a href="{{route('units')}}" class="{{isActive('units')}}">
                     <div class="text-gray-400 group-hover:text-gray-300 mr-3 flex-shrink-0 h-6 w-6">
                         <x-svg name="units"/>
                     </div>
                     Units
                 </a>
 
-                <a href="{{route('servers')}}"
-                   class="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-
+                <a href="{{route('servers')}}" class="{{isActive('servers')}}">
                     <div class="text-gray-400 group-hover:text-gray-300 mr-3 flex-shrink-0 h-6 w-6">
                         <x-svg name="servers"/>
                     </div>
@@ -56,24 +57,21 @@
                     Server
                 </a>
 
-                <a href="{{route('domains')}}"
-                   class="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-
+                <a href="{{route('domains')}}" class="{{isActive('domains')}}">
                     <div class="text-gray-400 group-hover:text-gray-300 mr-3 flex-shrink-0 h-6 w-6">
                         <x-svg name="domains"/>
                     </div>
                     Domains
                 </a>
 
-                <a href="{{route('reports')}}"
-                   class="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                <a href="{{route('reports')}}" class="{{isActive('reports')}}">
                     <div class="text-gray-400 group-hover:text-gray-300 mr-3 flex-shrink-0 h-6 w-6">
                         <x-svg name="reports"/>
                     </div>
                     Reports
                 </a>
-
             </nav>
+
             <div class="flex-2 mx-5">
                 <h1 class="text-white">Hello, {{auth()->user()->name}}</h1>
                 <h1 class="text-white">Role: {{auth()->user()->is_admin?"Admin":"PIC"}}</h1>
