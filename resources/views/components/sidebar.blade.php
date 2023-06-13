@@ -41,7 +41,7 @@
                     </div>
                     Users
                 </a>
-
+                
                 <a href="{{route('units')}}" class="{{isActive('units')}}">
                     <div class="text-gray-400 group-hover:text-gray-300 mr-3 flex-shrink-0 h-6 w-6">
                         <x-svg name="units"/>
