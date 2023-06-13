@@ -47,6 +47,9 @@ Route::get('/domains', [DomainController::class, 'index'])->middleware('auth')->
 
 // Users
 Route::get('/users', [UserController::class, 'index'])->middleware('auth')->name('users');
+Route::get('/users/create', [UserController::class, 'create'])->middleware('can:admin')->name('users.create');
+Route::post('/users', [UserController::class, 'store'])->middleware('can:admin')->name('users.store');
+
 
 // Reports
 Route::get('/reports', [ReportController::class, 'index'])->middleware('auth')->name('reports');
