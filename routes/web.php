@@ -49,6 +49,9 @@ Route::get('/domains', [DomainController::class, 'index'])->middleware('auth')->
 Route::get('/users', [UserController::class, 'index'])->middleware('auth')->name('users');
 Route::get('/users/create', [UserController::class, 'create'])->middleware('can:admin')->name('users.create');
 Route::post('/users', [UserController::class, 'store'])->middleware('can:admin')->name('users.store');
+Route::get('/users/{user}/edit', [UserController::class, 'edit'])->middleware('can:admin')->name('users.edit');
+Route::patch('/users/{user}', [UserController::class, 'update'])->middleware('can:admin')->name('users.update');
+Route::delete('/users/{user}', [UserController::class, 'destroy'])->middleware('can:admin')->name('users.delete');
 
 
 // Reports
