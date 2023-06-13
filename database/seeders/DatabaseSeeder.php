@@ -110,14 +110,6 @@ class DatabaseSeeder extends Seeder
             'unit_id' => $unit2->id
         ]);
 
-        $domain1 = Domain::create([
-            'url' => 'https://fmipa.uns.a.cid',
-            'name' => 'Website Utama FMIPA',
-            'description' => 'Website utama FMIPA',
-            'application_type' => 'Website',
-            'ip_address' => '192.168',
-        ]);
-
 //        $domain1 = Domain::create([
 //            'url' => 'https://sales.example.com',
 //            'nama' => 'Website Penjualan',
