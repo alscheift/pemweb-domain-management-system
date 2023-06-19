@@ -3,12 +3,17 @@
         <x-partials.sidebar/>
     </aside>
 
-    <header class="sm:ml-0 md:ml-64">
-        <x-partials.header/>
-    </header>
-
-    <main class=" p-4 sm:ml-0 md:ml-64">
-        {{$slot}}
+    <main class="sm:ml-0 md:ml-64">
+        <div class="flex flex-col">
+            <header>
+                <x-partials.header/>
+            </header>
+            <div class="p-4 max-w-full sm:px-6 md:px-8">
+                <!-- Konten utama -->
+                {{$slot}}
+                <!-- /End Konten utama -->
+            </div>
+        </div>
     </main>
 
     <footer>
