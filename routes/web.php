@@ -46,6 +46,11 @@ Route::delete('/units/{unit}', [UnitController::class, 'destroy'])->middleware('
 
 // Servers
 Route::get('/servers', [ServerController::class, 'index'])->middleware('can:admin')->name('servers');
+Route::get('/servers/create', [ServerController::class, 'create'])->middleware('can:admin')->name('servers.create');
+Route::post('/servers', [ServerController::class, 'store'])->middleware('can:admin')->name('servers.store');
+Route::get('/servers/{server}/edit', [ServerController::class, 'edit'])->middleware('can:admin')->name('servers.edit');
+Route::patch('/servers/{server}', [ServerController::class, 'update'])->middleware('can:admin')->name('servers.update');
+Route::delete('/servers/{server}', [ServerController::class, 'destroy'])->middleware('can:admin')->name('servers.destroy');
 
 // Domains
 Route::get('/domains', [DomainController::class, 'index'])->middleware('auth')->name('domains');

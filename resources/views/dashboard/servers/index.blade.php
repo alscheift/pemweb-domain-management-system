@@ -32,21 +32,28 @@
                                         <x-table.td>{{$server->ip_address}}</x-table.td>
                                         <x-table.td>{{$server->processor}}</x-table.td>
                                         <x-table.td>{{$server->core_processor_count}}</x-table.td>
-                                        <x-table.td>{{$server->ram}}</x-table.td>
+                                        <x-table.td>{{$server->ram}} GB</x-table.td>
                                         <x-table.td>{{$server->domains->count()}}</x-table.td>
                                         <x-table.td>{{$server->unit->name}}</x-table.td>
 
                                         <td class="px-4 py-4 text-sm whitespace-nowrap">
                                             <div class="flex items-center gap-x-6">
-                                                <button
-                                                    class="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
-                                                    Update
-                                                </button>
+                                                <a href="{{route('servers.update',$server->getRouteKey())}}/edit">
+                                                    <button
+                                                        class="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
+                                                        Update
+                                                    </button>
+                                                </a>
 
-                                                <button
-                                                    class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
-                                                    Delete
-                                                </button>
+                                                <form method="POST"
+                                                    action="{{route('servers.destroy',$server->getRouteKey())}}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button
+                                                        class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
+                                                        Delete
+                                                    </button>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>
@@ -58,7 +65,7 @@
             </div>
         </section>
         <div class="mt-5 ml-auto">
-            <a href="#">
+            <a href="{{route('servers.create')}}">
                 <button
                     class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
                     Add Server
