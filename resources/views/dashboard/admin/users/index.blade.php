@@ -72,7 +72,7 @@
                                                 </td>
                                                 <td class="px-4 py-4 text-sm whitespace-nowrap">
                                                     <div class="flex items-center gap-x-6">
-                                                        <a href="/users/{{route('users.update',$user->getRouteKey())}}/edit">
+                                                        <a href="{{route('users.update',$user->getRouteKey())}}/edit">
                                                             <button
                                                                 class="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
                                                                 Update

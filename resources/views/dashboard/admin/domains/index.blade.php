@@ -114,14 +114,14 @@
                         </div>
                     </div>
                 </section>
-                {{--                <div class="ml-auto mt-5">--}}
-                {{--                    <a href="{{route('users.create')}}">--}}
-                {{--                        <button--}}
-                {{--                            class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">--}}
-                {{--                            Add Domain--}}
-                {{--                        </button>--}}
-                {{--                    </a>--}}
-                {{--                </div>--}}
+                <div class="ml-auto mt-5">
+                    <a href="{{route('domains.create')}}">
+                        <button
+                            class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
+                            Add Domain
+                        </button>
+                    </a>
+                </div>
             </div>
         </x-main-content>
     </x-layout>
