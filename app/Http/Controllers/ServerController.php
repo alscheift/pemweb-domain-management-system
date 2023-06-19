@@ -9,6 +9,6 @@ class ServerController extends Controller
 {
     public function index(): View
     {
-        return view('dashboard.admin.servers.index');
+        return view('dashboard.servers.index');
     }
 }

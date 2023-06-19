@@ -9,6 +9,6 @@ class UnitController extends Controller
 {
     public function index(): View
     {
-        return view('dashboard.admin.units.index');
+        return view('dashboard.units.index');
     }
 }

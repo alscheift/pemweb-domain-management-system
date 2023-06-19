@@ -12,12 +12,7 @@ class DomainController extends Controller
 {
     public function index(): View
     {
-        return view('dashboard.admin.domains.index');
-    }
-
-    public function create(): View
-    {
-        return view('dashboard.admin.domains.create');
+        return view('dashboard.domains.index');
     }
 
     public function store(): RedirectResponse
@@ -35,5 +30,10 @@ class DomainController extends Controller
         Domain::create($attributes);
 
         return redirect(route('domains'))->with('success', 'Domain berhasil ditambahkan');
+    }
+
+    public function create(): View
+    {
+        return view('dashboard.domains.create');
     }
 }

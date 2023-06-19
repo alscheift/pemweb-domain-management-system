@@ -13,12 +13,7 @@ class UserController extends Controller
 {
     public function index(): View
     {
-        return view('dashboard.admin.users.index');
-    }
-
-    public function create(): View
-    {
-        return view('dashboard.admin.users.create');
+        return view('dashboard.users.index');
     }
 
     public function store(): RedirectResponse
@@ -38,9 +33,14 @@ class UserController extends Controller
         return redirect(route('users'))->with('success', 'User berhasil ditambahkan');
     }
 
+    public function create(): View
+    {
+        return view('dashboard.users.create');
+    }
+
     public function edit(User $user): View
     {
-        return view('dashboard.admin.users.edit', compact('user'));
+        return view('dashboard.users.edit', compact('user'));
     }
 
     public function update(User $user): RedirectResponse
