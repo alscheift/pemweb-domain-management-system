@@ -4,13 +4,11 @@
     </aside>
 
     <header class="sm:ml-0 md:ml-64">
-        <x-header/>
+        <x-partials.header/>
     </header>
 
-    <main class="sm:ml-0 md:ml-64">
-        <div class="p-4">
-            {{$slot}}
-        </div>
+    <main class=" p-4 sm:ml-0 md:ml-64">
+        {{$slot}}
     </main>
 
     <footer>
