@@ -1,4 +1,4 @@
-<x-template>
+<x-layout.app>
     <div class="flex h-screen">
         <div class="w-full max-w-sm p-6 m-auto mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800">
             <div class="flex justify-center mx-auto">
@@ -46,6 +46,6 @@
             @enderror
         </div>
     </div>
-</x-template>
+</x-layout.app>
 
 
