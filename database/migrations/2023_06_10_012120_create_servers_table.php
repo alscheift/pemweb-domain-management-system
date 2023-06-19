@@ -21,7 +21,7 @@ return new class extends Migration {
 
             $table->string('processor');
             $table->tinyInteger('core_processor_count');
-            $table->string('ram');
+            $table->smallInteger('ram');
 
             $table->timestamps();
         });
