@@ -4,105 +4,38 @@
             <div class="flex flex-col">
                 <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                        <div
-                            class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
-                            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                                <thead class="bg-gray-50 dark:bg-gray-800">
+                        <x-table>
+                            <x-slot name="thead">
                                 <tr>
-                                    <th scope="col"
-                                        class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        <div class="flex items-center gap-x-3">
-                                            <button class="flex items-center gap-x-2">ID</button>
-                                        </div>
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        Name
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        Server Type
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        Status
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        IP Address
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        Processor
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        Core Processor Count
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        RAM
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        Domain Count
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        Unit
-                                    </th>
-
-                                    <th scope="col" class="relative py-3.5 px-4">
+                                    <x-table.th>ID</x-table.th>
+                                    <x-table.th>Name</x-table.th>
+                                    <x-table.th>Server Type</x-table.th>
+                                    <x-table.th>Status</x-table.th>
+                                    <x-table.th>IP Address</x-table.th>
+                                    <x-table.th>Processor</x-table.th>
+                                    <x-table.th>Core Processor Count</x-table.th>
+                                    <x-table.th>RAM</x-table.th>
+                                    <x-table.th>Domain Count</x-table.th>
+                                    <x-table.th>Unit</x-table.th>
+                                    <x-table.th>
                                         <span class="sr-only">Actions</span>
-                                    </th>
+                                    </x-table.th>
                                 </tr>
-                                </thead>
-                                <tbody
-                                    class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+                            </x-slot>
+                            <x-slot name="tbody">
                                 @foreach(\App\Models\Server::all() as $server)
                                     <tr>
-                                        <td class="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
-                                            <div class="inline-flex items-center gap-x-3">
+                                        <x-table.td>{{$server->id}}</x-table.td>
+                                        <x-table.td>{{$server->name}}</x-table.td>
+                                        <x-table.td>{{$server->server_type}}</x-table.td>
+                                        <x-table.td>{{$server->status}}</x-table.td>
+                                        <x-table.td>{{$server->ip_address}}</x-table.td>
+                                        <x-table.td>{{$server->processor}}</x-table.td>
+                                        <x-table.td>{{$server->core_processor_count}}</x-table.td>
+                                        <x-table.td>{{$server->ram}}</x-table.td>
+                                        <x-table.td>{{$server->domains->count()}}</x-table.td>
+                                        <x-table.td>{{$server->unit->name}}</x-table.td>
 
-                                                <span>{{$server->id}}</span>
-                                            </div>
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$server->name}}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$server->server_type}}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$server->status}}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$server->ip_address}}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$server->processor}}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$server->core_processor_count}}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$server->ram}}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$server->domains->count()}}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$server->unit->name}}
-                                        </td>
                                         <td class="px-4 py-4 text-sm whitespace-nowrap">
                                             <div class="flex items-center gap-x-6">
                                                 <button
@@ -118,20 +51,19 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                            </x-slot>
+                        </x-table>
                     </div>
                 </div>
             </div>
         </section>
-        {{--                <div class="ml-auto mt-5">--}}
-        {{--                    <a href="{{route('users.create')}}">--}}
-        {{--                        <button--}}
-        {{--                            class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">--}}
-        {{--                            Add User--}}
-        {{--                        </button>--}}
-        {{--                    </a>--}}
-        {{--                </div>--}}
+        <div class="mt-5 ml-auto">
+            <a href="#">
+                <button
+                    class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
+                    Add Server
+                </button>
+            </a>
+        </div>
     </div>
 </x-layouts.dashboard>
