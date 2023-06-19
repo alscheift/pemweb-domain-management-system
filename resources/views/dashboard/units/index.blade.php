@@ -65,15 +65,22 @@
                                         </td>
                                         <td class="px-4 py-4 text-sm whitespace-nowrap">
                                             <div class="flex items-center gap-x-6">
-                                                <button
-                                                    class="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
-                                                    Update
-                                                </button>
+                                                <a href="{{route('units.update',$unit->getRouteKey())}}/edit">
+                                                    <button
+                                                        class="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
+                                                        Update
+                                                    </button>
+                                                </a>
 
-                                                <button
-                                                    class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
-                                                    Delete
-                                                </button>
+                                                <form method="POST"
+                                                    action="{{route('units.destroy',$unit->getRouteKey())}}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button
+                                                        class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
+                                                        Delete
+                                                    </button>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>
@@ -85,13 +92,13 @@
                 </div>
             </div>
         </section>
-        {{--                <div class="ml-auto mt-5">--}}
-        {{--                    <a href="{{route('users.create')}}">--}}
-        {{--                        <button--}}
-        {{--                            class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">--}}
-        {{--                            Add User--}}
-        {{--                        </button>--}}
-        {{--                    </a>--}}
-        {{--                </div>--}}
+        <div class="ml-auto mt-5">
+            <a href="{{route('units.create')}}">
+                <button
+                    class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
+                    Add Unit
+                </button>
+            </a>
+        </div>
     </div>
 </x-layouts.dashboard>
