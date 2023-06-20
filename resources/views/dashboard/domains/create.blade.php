@@ -23,40 +23,11 @@
                         </select>
 
                     </div>
-                    <div>
-                        <label class="text-gray-700 dark:text-gray-200" for="url">URL</label>
-                        <input id="url" name="url" type="text"
-                               value="{{old('url')??''}}"
-                               class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                    </div>
-
-                    <div>
-                        <label class="text-gray-700 dark:text-gray-200" for="email">PORT</label>
-                        <input id="port" name="port" type="text"
-                               value="{{old('port')??''}}"
-                               class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                    </div>
-
-                    <div>
-                        <label class="text-gray-700 dark:text-gray-200" for="application_type">Application
-                            Type</label>
-                        <input id="application_type" name="application_type" type="text"
-                               value="{{old('application_type')??''}}"
-                               class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                    </div>
-                    <div>
-                        <label class="text-gray-700 dark:text-gray-200" for="name">Name</label>
-                        <input id="name" name="name" type="text"
-                               value="{{old('name')??''}}"
-                               class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                    </div>
-
-                    <div>
-                        <label class="text-gray-700 dark:text-gray-200" for="description">Description</label>
-                        <input id="description" name="description" type="text"
-                               value="{{old('description')??''}}"
-                               class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                    </div>
+                    <x-forms.input name="url">URL</x-forms.input>
+                    <x-forms.input name="port">PORT</x-forms.input>
+                    <x-forms.input name="application_type">Application Type</x-forms.input>
+                    <x-forms.input name="name">Name</x-forms.input>
+                    <x-forms.input name="description">Description</x-forms.input>
 
                     <div>
                         <label class="text-gray-700 dark:text-gray-200" for="http_status">HTTP Status</label>
@@ -73,13 +44,7 @@
 
                 </div>
 
-                <div class="flex justify-end mt-6">
-                    <button
-                        type="submit"
-                        class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
-                        Save
-                    </button>
-                </div>
+                <x-forms.submit/>
             </form>
         </section>
     </div>
