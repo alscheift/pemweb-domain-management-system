@@ -4,90 +4,41 @@
             <div class="flex flex-col">
                 <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                        <div
-                            class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
-                            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                                <thead class="bg-gray-50 dark:bg-gray-800">
+                        <x-table>
+                            <x-slot name="thead">
                                 <tr>
-                                    <th scope="col"
-                                        class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        <div class="flex items-center gap-x-3">
-                                            <button class="flex items-center gap-x-2">ID</button>
-                                        </div>
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        Name
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        Description
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        Server Count
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        PIC Count
-                                    </th>
-
-                                    <th scope="col" class="relative py-3.5 px-4">
+                                    <x-table.th>ID</x-table.th>
+                                    <x-table.th>Name</x-table.th>
+                                    <x-table.th>Domain</x-table.th>
+                                    <x-table.th>Description</x-table.th>
+                                    <x-table.th>Server Count</x-table.th>
+                                    <x-table.th>PIC Count</x-table.th>
+                                    <x-table.th>
                                         <span class="sr-only">Actions</span>
-                                    </th>
+                                    </x-table.th>
+
                                 </tr>
-                                </thead>
-                                <tbody
-                                    class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+                            </x-slot>
+                            <x-slot name="tbody">
                                 @foreach(\App\Models\Unit::all() as $unit)
                                     <tr>
-                                        <td class="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
-                                            <div class="inline-flex items-center gap-x-3">
+                                        <x-table.td>{{$unit->id}}</x-table.td>
+                                        <x-table.td>{{$unit->name}}</x-table.td>
+                                        <x-table.td>{{$unit->higher_domain}}</x-table.td>
+                                        <x-table.td>{{$unit->description}}</x-table.td>
+                                        <x-table.td>{{$unit->servers->count()}}</x-table.td>
+                                        <x-table.td>{{$unit->users->count()}}</x-table.td>
 
-                                                <span>{{$unit->id}}</span>
-                                            </div>
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$unit->name}}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$unit->description}}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$unit->servers->count()}}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$unit->users->count()}}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                            <div class="flex items-center gap-x-6">
-                                                <a href="{{route('units.update',$unit->getRouteKey())}}/edit">
-                                                    <button
-                                                        class="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
-                                                        Update
-                                                    </button>
-                                                </a>
-
-                                                <form method="POST"
-                                                    action="{{route('units.destroy',$unit->getRouteKey())}}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button
-                                                        class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
-                                                        Delete
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </td>
+                                        <x-table.actions>
+                                            <x-table.btn-update
+                                                route="{{route('units.update',$unit->getRouteKey())}}/edit"/>
+                                            <x-table.btn-delete
+                                                route="{{route('units.destroy',$unit->getRouteKey())}}"/>
+                                        </x-table.actions>
                                     </tr>
                                 @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                            </x-slot>
+                        </x-table>
                     </div>
                 </div>
             </div>
