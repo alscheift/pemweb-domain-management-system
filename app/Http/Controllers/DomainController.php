@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Domain;
 use App\Models\DomainImages;
 use App\Models\User;
+use GuzzleHttp\RequestOptions;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -31,6 +32,7 @@ class DomainController extends Controller
             'application_type' => 'required',
             'port' => 'required',
             'server_id' => 'required',
+            'user_id' => 'required',
         ]);
 
         $domain = Domain::create([
@@ -40,6 +42,7 @@ class DomainController extends Controller
             'application_type' => $attributes['application_type'],
             'port' => $attributes['port'],
             'server_id' => $attributes['server_id'],
+            'user_id' => $attributes['user_id'],
             'http_status' => $http_status,
         ]);
 
@@ -62,13 +65,17 @@ class DomainController extends Controller
     // function to check http status
     public function checkHttpStatus($url)
     {
-        $response = Http::get($url);
-        $statusCode = $response->getStatusCode();
-        if ($statusCode === 200) {
-            return 'Active';
-        } else {
+        try {
+            $response = Http::connectTimeout(1)->get($url, [
+                RequestOptions::ALLOW_REDIRECTS => false,
+            ]);
+            if ($response->ok()) {
+                return 'Active';
+            }
+        } catch (\Exception $e) {
             return 'No Active';
         }
+        return 'No Active';
     }
 
     public function create(): View
@@ -98,6 +105,7 @@ class DomainController extends Controller
             'application_type' => 'required',
             'port' => 'required',
             'server_id' => 'required',
+            'user_id' => 'required'
         ]);
 
         $domain->update([
@@ -108,6 +116,7 @@ class DomainController extends Controller
             'port' => $attributes['port'],
             'server_id' => $attributes['server_id'],
             'http_status' => $http_status,
+            'user_id' => $attributes['user_id']
         ]);
 
         $domainId = $domain->id;
@@ -130,7 +139,7 @@ class DomainController extends Controller
             }
             // delete old image
             $oldImage->delete();
-        } 
+        }
 
         return redirect(route('domains'))->with('success', 'Domain updated successfully');
     }

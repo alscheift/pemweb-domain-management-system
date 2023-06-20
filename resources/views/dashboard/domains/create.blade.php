@@ -6,36 +6,15 @@
             <form method="POST" action="{{route('domains.store')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="grid grid-cols-1 gap-6 mt-4">
-                    <div>
-                        <label class="text-gray-700 dark:text-gray-200" for="name">Name</label>
-                        <input id="name" name="name" type="text"
-                            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                    <div class="hidden">
+                        <input id="user_id" name="user_id" value="{{auth()->user()->id}}"/>
                     </div>
-
-                    <div>
-                        <label class="text-gray-700 dark:text-gray-200" for="url">URL</label>
-                        <input id="url" name="url" type="text"
-                            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                    </div>
-
-                    <div>
-                        <label class="text-gray-700 dark:text-gray-200" for="description">Description</label>
-                        <input id="description" name="description" type="text"
-                            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                    </div>
-
-                    <div>
-                        <label class="text-gray-700 dark:text-gray-200" for="application_type">Application
-                            Type</label>
-                        <input id="application_type" name="application_type" type="text"
-                            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                    </div>
-
-                    <div>
-                        <label class="text-gray-700 dark:text-gray-200" for="port">PORT</label>
-                        <input id="port" name="port" type="number"
-                            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                    </div>
+                    
+                    <x-forms.input name="name">Name</x-forms.input>
+                    <x-forms.input name="url">URL</x-forms.input>
+                    <x-forms.input name="description">Description</x-forms.input>
+                    <x-forms.input name="application_type">Application Type</x-forms.input>
+                    <x-forms.input name="port">PORT</x-forms.input>
 
                     <div>
                         <label class="text-gray-700 dark:text-gray-200" for="name">Server</label>
@@ -43,32 +22,28 @@
                                 name="server_id"
                                 class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option selected>Choose Server (Unit)</option>
-                            @foreach(\App\Models\Server::all() as $server)
+                            @foreach(auth()->user()->unit->servers as $server)
                                 @if($server->status == 'Active')
-                                    <option value="{{$server->id}}"> {{$server->name.' ('.$server->unit->name.')'}} </option>
+                                    <option @selected(old('server_id')==$server->id)
+                                            value="{{$server->id}}
+                                    "> {{$server->name.' ('.$server->unit->name.')'}} </option>
                                 @endif
                             @endforeach
                         </select>
                     </div>
 
                     <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="images" >Screenshot Website View</label>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="images">Screenshot Website View</label>
                         <div class=" grid grid-cols-1 sm:grid-cols-2">
                             <img class="img-preview w-full h-auto mb-4">
                         </div>
-                        <input id="images" name="images" onchange="previewImage()" 
-                            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+                        <input id="images" name="images" onchange="previewImage()"
+                               class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
                     </div>
-                
+
                 </div>
 
-                <div class="flex justify-end mt-6">
-                    <button
-                        type="submit"
-                        class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
-                        Save
-                    </button>
-                </div>
+                <x-forms.submit/>
             </form>
         </section>
     </div>
