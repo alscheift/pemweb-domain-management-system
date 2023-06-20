@@ -56,6 +56,9 @@ Route::delete('/servers/{server}', [ServerController::class, 'destroy'])->middle
 Route::get('/domains', [DomainController::class, 'index'])->middleware('auth')->name('domains');
 Route::get('/domains/create', [DomainController::class, 'create'])->middleware('auth')->name('domains.create');
 Route::post('/domains', [DomainController::class, 'store'])->middleware('auth')->name('domains.store');
+Route::get('/domains/{domain}/edit', [DomainController::class, 'edit'])->middleware('auth')->name('domains.edit');
+Route::patch('/domains/{domain}', [DomainController::class, 'update'])->middleware('auth')->name('domains.update');
+Route::delete('/domains/{domain}', [DomainController::class, 'destroy'])->middleware('auth')->name('domains.destroy');
 
 
 // Users
