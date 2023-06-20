@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('application_type')->nullable();
 
             $table->integer('port')->nullable();
-            $table->integer('http_status')->nullable();
+            $table->string('http_status')->nullable();
 
             $table->timestamps();
         });
