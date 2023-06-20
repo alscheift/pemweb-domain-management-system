@@ -34,12 +34,14 @@ class DatabaseSeeder extends Seeder
         // --
         $unit1 = Unit::create([
             'name' => 'FMIPA',
-            'description' => 'Unit FMIPA'
+            'description' => 'Unit FMIPA',
+            'higher_domain' => 'fmipa.uns.ac.id'
         ]);
 
         $unit2 = Unit::create([
             'name' => 'FK',
-            'description' => 'Unit FK'
+            'description' => 'Unit FK',
+            'higher_domain' => 'fk.uns.ac.id'
         ]);
 
         $user1 = User::factory()->create([
@@ -109,116 +111,6 @@ class DatabaseSeeder extends Seeder
             'ram' => '8',
             'unit_id' => $unit2->id
         ]);
-
-//        $domain1 = Domain::create([
-//            'url' => 'https://sales.example.com',
-//            'nama' => 'Website Penjualan',
-//            'deskripsi' => 'Website penjualan produk',
-//            'jenis_aplikasi' => 'Website',
-//
-//            'ip_address' => '192.168.1.1',
-//            'port' => '80',
-//            'processor' => 'Intel Core i7-7700K',
-//            'jumlah_core_processor' => '4',
-//            'ram' => '16',
-//
-//            'jenis_server' => 'Virtual',
-//            'nama_server' => 'VPS01',
-//            'status' => 'Active',
-//            'http_status' => '200',
-//            'user_id' => $user1->id,
-//            'unit_id' => $unit1->id,
-//        ]);
-//
-//        $domain2 = Domain::create([
-//            'url' => 'https://sales-api.example.com',
-//            'nama' => 'API Penjualan',
-//            'deskripsi' => 'API penjualan produk',
-//            'jenis_aplikasi' => 'Web API',
-//            'ip_address' => '192.168.1.2',
-//            'port' => '8080',
-//            'processor' => 'AMD Ryzen 7 3700X',
-//            'jumlah_core_processor' => '8',
-//            'ram' => '16',
-//            'jenis_server' => 'Virtual',
-//            'nama_server' => 'VPS02',
-//            'status' => 'Active',
-//            'http_status' => '200',
-//            'user_id' => $user1->id,
-//            'unit_id' => $unit1->id,
-//        ]);
-//
-//        $domain3 = Domain::create([
-//            'url' => 'https://marketing.example.com',
-//            'nama' => 'Website Marketing',
-//            'deskripsi' => 'Website pemasaran produk',
-//            'jenis_aplikasi' => 'Website',
-//            'ip_address' => '192.168.2.1',
-//            'port' => '80',
-//            'processor' => 'Intel Core i7-7700K',
-//            'jumlah_core_processor' => '4',
-//            'ram' => '16',
-//            'jenis_server' => 'Virtual',
-//            'nama_server' => 'VPS03',
-//            'status' => 'Active',
-//            'http_status' => '200',
-//            'user_id' => $user2->id,
-//            'unit_id' => $unit2->id,
-//        ]);
-//
-//        $domain4 = Domain::create([
-//            'url' => 'https://marketing-api.example.com',
-//            'nama' => 'API Pemasaran',
-//            'deskripsi' => 'API pemasaran produk',
-//            'jenis_aplikasi' => 'REST',
-//            'ip_address' => '192.168.2.2',
-//            'port' => '8080',
-//            'processor' => 'AMD Ryzen 7 3700X',
-//            'jumlah_core_processor' => '8',
-//            'ram' => '16',
-//            'jenis_server' => 'Virtual',
-//            'nama_server' => 'VPS04',
-//            'status' => 'Active',
-//            'http_status' => '200',
-//            'user_id' => $user2->id,
-//            'unit_id' => $unit2->id,
-//        ]);
-//
-//        $domain5 = Domain::create([
-//            'url' => 'https://finance.example.com',
-//            'nama' => 'Website Finance',
-//            'deskripsi' => 'Website keuangan',
-//            'jenis_aplikasi' => 'Website',
-//            'ip_address' => '192.168.3.1',
-//            'port' => '80',
-//            'processor' => 'AMD Ryzen 5',
-//            'jumlah_core_processor' => '4',
-//            'ram' => '6',
-//            'jenis_server' => 'Virtual',
-//            'nama_server' => 'VPS03',
-//            'status' => 'Active',
-//            'http_status' => '200',
-//            'user_id' => $user3->id,
-//            'unit_id' => $unit3->id,
-//        ]);
-//
-//        $domain6 = Domain::create([
-//            'url' => 'https://finance-api.example.com',
-//            'nama' => 'API Keuangan',
-//            'deskripsi' => 'API keuangan',
-//            'jenis_aplikasi' => 'Web API',
-//            'ip_address' => '192.168.3.2',
-//            'port' => '8080',
-//            'processor' => 'AMD Ryzen 7 3700X',
-//            'jumlah_core_processor' => '8',
-//            'ram' => '16',
-//            'jenis_server' => 'Virtual',
-//            'nama_server' => 'VPS04',
-//            'status' => 'Active',
-//            'http_status' => '200',
-//            'user_id' => $user3->id,
-//            'unit_id' => $unit3->id,
-//        ]);
 
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
