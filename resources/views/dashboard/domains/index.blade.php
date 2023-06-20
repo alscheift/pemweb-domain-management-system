@@ -28,6 +28,11 @@
 
                                     <th scope="col"
                                         class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                        Url
+                                    </th>
+
+                                    <th scope="col"
+                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                         Application Type
                                     </th>
 
@@ -73,6 +78,9 @@
                                             {{$domain->description}}
                                         </td>
                                         <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                                            {{$domain->url}}
+                                        </td>
+                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                                             {{$domain->application_type}}
                                         </td>
                                         <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
@@ -90,15 +98,22 @@
 
                                         <td class="px-4 py-4 text-sm whitespace-nowrap">
                                             <div class="flex items-center gap-x-6">
-                                                <button
-                                                    class="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
-                                                    Update
-                                                </button>
+                                                <a href="{{route('domains.update',$domain->getRouteKey())}}/edit">
+                                                    <button
+                                                        class="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
+                                                        Update
+                                                    </button>
+                                                </a>
 
-                                                <button
-                                                    class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
-                                                    Delete
-                                                </button>
+                                                <form method="POST"
+                                                    action="{{route('domains.destroy',$domain->getRouteKey())}}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button
+                                                        class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
+                                                        Delete
+                                                    </button>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>
