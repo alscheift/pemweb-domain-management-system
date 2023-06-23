@@ -20,7 +20,7 @@
                                 </tr>
                             </x-slot>
                             <x-slot name="tbody">
-                                @foreach(\App\Models\Unit::all() as $unit)
+                                @foreach($units as $unit)
                                     <tr>
                                         <x-table.td>{{$unit->id}}</x-table.td>
                                         <x-table.td>{{$unit->name}}</x-table.td>
@@ -43,13 +43,32 @@
                 </div>
             </div>
         </section>
-        <div class="ml-auto mt-5">
-            <a href="{{route('units.create')}}">
-                <button
-                    class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
-                    Add Unit
-                </button>
-            </a>
+        <div class="grid grid-cols-2 gap-5 mt-5">
+            <div class="p-4 mr-auto">
+                @if ($units->currentPage() > 1)
+                    <a href="{{ $units->previousPageUrl() }}">
+                        <button class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600">
+                            Previous
+                        </button>
+                    </a>
+                @endif
+
+                @if ($units->hasMorePages())
+                    <a href="{{ $units->nextPageUrl() }}">
+                        <button class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600">
+                            Next
+                        </button>
+                    </a>
+                @endif
+            </div>
+            <div class="p-4 ml-auto">
+                <a href="{{route('units.create')}}">
+                    <button
+                        class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600">
+                        Add Unit
+                    </button>
+                </a>
+            </div>
         </div>
     </div>
 </x-layouts.dashboard>
