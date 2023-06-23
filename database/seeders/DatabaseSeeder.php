@@ -44,6 +44,24 @@ class DatabaseSeeder extends Seeder
             'higher_domain' => 'fk.uns.ac.id'
         ]);
 
+        $unit3 = Unit::create([
+            'name' => 'FKIP',
+            'description' => 'Unit FKIP',
+            'higher_domain' => 'fkip.uns.ac.id'
+        ]);
+
+        $unit4 = Unit::create([
+            'name' => 'FATISDA',
+            'description' => 'Unit FATISDA',
+            'higher_domain' => 'fatisda.uns.ac.id'
+        ]);
+
+        $unit5 = Unit::create([
+            'name' => 'FH',
+            'description' => 'Unit FH',
+            'higher_domain' => 'fh.uns.ac.id'
+        ]);
+
         $user1 = User::factory()->create([
             'username' => 'user1',
             'password' => bcrypt('user'),
