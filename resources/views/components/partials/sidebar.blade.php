@@ -35,20 +35,23 @@
                     Dashboard
                 </a>
 
-                <a href="{{route('users')}}" class="{{isActive('users')}}">
-                    <div class="text-gray-400 group-hover:text-gray-300 mr-3 flex-shrink-0 h-6 w-6">
-                        <x-svg name="users"/>
-                    </div>
-                    Users
-                </a>
+                {{-- if admin  --}}
+                @can('admin')
+                    <a href="{{route('users')}}" class="{{isActive('users')}}">
+                        <div class="text-gray-400 group-hover:text-gray-300 mr-3 flex-shrink-0 h-6 w-6">
+                            <x-svg name="users"/>
+                        </div>
+                        Users
+                    </a>
+                    
+                    <a href="{{route('units')}}" class="{{isActive('units')}}">
+                        <div class="text-gray-400 group-hover:text-gray-300 mr-3 flex-shrink-0 h-6 w-6">
+                            <x-svg name="units"/>
+                        </div>
+                        Units
+                    </a>
+                @endcan
                 
-                <a href="{{route('units')}}" class="{{isActive('units')}}">
-                    <div class="text-gray-400 group-hover:text-gray-300 mr-3 flex-shrink-0 h-6 w-6">
-                        <x-svg name="units"/>
-                    </div>
-                    Units
-                </a>
-
                 <a href="{{route('servers')}}" class="{{isActive('servers')}}">
                     <div class="text-gray-400 group-hover:text-gray-300 mr-3 flex-shrink-0 h-6 w-6">
                         <x-svg name="servers"/>
@@ -62,6 +65,20 @@
                         <x-svg name="domains"/>
                     </div>
                     Domains
+                </a>
+
+                <a href="{{route('notifications')}}" class="{{isActive('notifications')}}">
+                    <div class="text-gray-400 group-hover:text-gray-300 mr-3 flex-shrink-0 h-6 w-6">
+                        <x-svg name="notifications"/>
+                    </div>
+                    Notifcations
+                </a>
+                
+                <a href="{{route('completions')}}" class="{{isActive('completions')}}">
+                    <div class="text-gray-400 group-hover:text-gray-300 mr-3 flex-shrink-0 h-6 w-6">
+                        <x-svg name="completions"/>
+                    </div>
+                    Completion Target
                 </a>
 
                 <a href="{{route('reports')}}" class="{{isActive('reports')}}">

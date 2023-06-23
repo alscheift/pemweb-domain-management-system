@@ -69,6 +69,15 @@ Route::get('/users/{user}/edit', [UserController::class, 'edit'])->middleware('c
 Route::patch('/users/{user}', [UserController::class, 'update'])->middleware('can:admin')->name('users.update');
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->middleware('can:admin')->name('users.destroy');
 
+// Notifications
+Route::get('/notificationw', function () {
+    return view('dashboard.notifications.index');
+})->middleware('auth')->name('notifications');
+
+// Completions
+Route::get('/completions', function () {
+    return view('dashboard.completions.index');
+})->middleware('auth')->name('completions');
 
 // Reports
 Route::get('/reports', [ReportController::class, 'index'])->middleware('auth')->name('reports');
