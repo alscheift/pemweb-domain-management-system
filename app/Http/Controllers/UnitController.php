@@ -9,9 +9,21 @@ use Illuminate\View\View;
 
 class UnitController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        return view('dashboard.units.index');
+        $search = $request->input('search');
+        $units = Unit::query();
+
+        if ($search) {
+            $units = Unit::where('id', 'like', "%$search%")
+                ->orWhere('name', 'like', "%$search%")
+                ->orWhere('description', 'like', "%$search%")
+                ->orWhere('higher_domain', 'like', "%$search%");
+        }
+
+        $units = $units->paginate(7);
+
+        return view('dashboard.units.index', compact('units'));
     }
 
     public function store(): RedirectResponse
