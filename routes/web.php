@@ -36,14 +36,6 @@ Route::post('logout', [SessionsController::class, 'destroy']);
 
 Route::get('test', [SessionsController::class, 'test']);
 
-// Units
-Route::get('/units', [UnitController::class, 'index'])->middleware('can:admin')->name('units');
-Route::get('/units/create', [UnitController::class, 'create'])->middleware('can:admin')->name('units.create');
-Route::post('/units', [UnitController::class, 'store'])->middleware('can:admin')->name('units.store');
-Route::get('/units/{unit}/edit', [UnitController::class, 'edit'])->middleware('can:admin')->name('units.edit');
-Route::patch('/units/{unit}', [UnitController::class, 'update'])->middleware('can:admin')->name('units.update');
-Route::delete('/units/{unit}', [UnitController::class, 'destroy'])->middleware('can:admin')->name('units.destroy');
-
 // Servers
 Route::get('/servers', [ServerController::class, 'index'])->middleware('can:admin')->name('servers');
 Route::get('/servers/create', [ServerController::class, 'create'])->middleware('can:admin')->name('servers.create');
@@ -81,3 +73,13 @@ Route::get('/completions', function () {
 
 // Reports
 Route::get('/reports', [ReportController::class, 'index'])->middleware('auth')->name('reports');
+
+Route::middleware('auth')->group(function () {
+    // Units
+    Route::get('/units', [UnitController::class, 'index'])->middleware('can:admin')->name('units');
+    Route::get('/units/create', [UnitController::class, 'create'])->middleware('can:admin')->name('units.create');
+    Route::post('/units', [UnitController::class, 'store'])->middleware('can:admin')->name('units.store');
+    Route::get('/units/{unit}/edit', [UnitController::class, 'edit'])->middleware('can:admin')->name('units.edit');
+    Route::patch('/units/{unit}', [UnitController::class, 'update'])->middleware('can:admin')->name('units.update');
+    Route::delete('/units/{unit}', [UnitController::class, 'destroy'])->middleware('can:admin')->name('units.destroy');
+});
