@@ -31,6 +31,7 @@ class UnitController extends Controller
         $attributes = request()->validate([
             'name' => 'required',
             'description' => 'required',
+            'higher_domain' => 'required',
         ]);
 
         Unit::create($attributes);
@@ -53,6 +54,7 @@ class UnitController extends Controller
         $attributes = request()->validate([
             'name' => 'required',
             'description' => 'required',
+            'higher_domain' => 'required',
         ]);
 
         $unit->update($attributes);

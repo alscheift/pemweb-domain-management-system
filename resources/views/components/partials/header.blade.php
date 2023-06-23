@@ -11,7 +11,7 @@
     </button>
     <div class="flex flex-1 justify-between px-4">
         <div class="flex flex-1">
-            <form class="flex w-full md:ml-0" action="{{ route(Route::currentRouteName()) }}" method="GET">
+            <form class="flex w-full md:ml-0" action="#" method="GET">
                 <label for="search-field" class="sr-only">Search</label>
                 <div class="relative w-full text-gray-400 focus-within:text-gray-600">
                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center">
