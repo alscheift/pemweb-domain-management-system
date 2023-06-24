@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('solutions', function (Blueprint $table) {
             $table->id();
-            $table->date('tanggal_penyelesaian');
-            $table->text('target_penyelesaian');
-            $table->string('status', 100);
-
+            $table->string('status');
+            $table->text('description');
+            $table->date('target_date');
+            $table->date('date_of_solution')->nullable();
             $table->timestamps();
         });
     }
