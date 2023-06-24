@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DomainController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ServerController;
 use App\Http\Controllers\SessionsController;
@@ -44,10 +45,6 @@ Route::get('/domains/{domain}/edit', [DomainController::class, 'edit'])->middlew
 Route::patch('/domains/{domain}', [DomainController::class, 'update'])->middleware('auth')->name('domains.update');
 Route::delete('/domains/{domain}', [DomainController::class, 'destroy'])->middleware('auth')->name('domains.destroy');
 
-// Notifications
-Route::get('/notificationw', function () {
-    return view('dashboard.notifications.index');
-})->middleware('auth')->name('notifications');
 
 // Completions
 Route::get('/completions', function () {
@@ -83,4 +80,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/servers/{server}', [ServerController::class, 'destroy'])->middleware('can:pic')->name('servers.destroy');
 
     
+
+    // Notifications
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
+    Route::get('/notifications/create', [NotificationController::class, 'create'])->middleware('can:admin')->name('notifications.create');
+    Route::post('/notifications', [NotificationController::class, 'store'])->middleware('can:admin')->name('notifications.store');
+    Route::get('/notifications/{unit}/edit', [NotificationController::class, 'edit'])->middleware('can:admin')->name('notifications.edit');
+    Route::patch('/notifications/{unit}', [NotificationController::class, 'update'])->middleware('can:admin')->name('notifications.update');
+    Route::delete('/notifications/{unit}', [NotificationController::class, 'destroy'])->middleware('can:admin')->name('notifications.destroy');
 });
