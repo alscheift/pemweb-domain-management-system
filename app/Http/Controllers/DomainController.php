@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Domain;
 use App\Models\DomainImages;
+use App\Models\Unit;
 use App\Models\User;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Http\RedirectResponse;
@@ -16,7 +17,15 @@ class DomainController extends Controller
 {
     public function index(): View
     {
-        return view('dashboard.domains.index');
+        $domains = [];
+
+        if (auth()->user()->can('admin')) {
+            $domains = Domain::all()->paginate(10);
+        } else if (auth()->user()->can('pic')) {
+            $domains = auth()->user()->unit->domains()->paginate(10);
+        }
+
+        return view('dashboard.domains.index', compact('domains'));
     }
 
     public function store(): RedirectResponse

@@ -22,7 +22,7 @@
                                 </tr>
                             </x-slot>
                             <x-slot name="tbody">
-                                @foreach(\App\Models\Domain::all() as $domain)
+                                @foreach($domains as $domain)
                                     <tr>
                                         <x-table.td>{{$domain->id}}</x-table.td>
                                         <x-table.td>{{$domain->name}}</x-table.td>
@@ -34,26 +34,15 @@
                                         <x-table.td>{{$domain->server->name}}</x-table.td>
                                         <x-table.td>{{$domain->server->unit->name}}</x-table.td>
 
-                                        <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                            <div class="flex items-center gap-x-6">
-                                                <a href="{{route('domains.update',$domain->getRouteKey())}}/edit">
-                                                    <button
-                                                        class="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
-                                                        Update
-                                                    </button>
-                                                </a>
-
-                                                <form method="POST"
-                                                      action="{{route('domains.destroy',$domain->getRouteKey())}}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button
-                                                        class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
-                                                        Delete
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </td>
+                                        <x-table.actions>
+                                            @can('pic')
+                                                <x-table.btn-update
+                                                    route="{{route('domains.update',$domain->getRouteKey())}}/edit"/>
+                                                <x-table.btn-delete
+                                                    text="{{$domain->url}}"
+                                                    route="{{route('domains.destroy',$domain->getRouteKey())}}"/>
+                                            @endcan
+                                        </x-table.actions>
                                     </tr>
                                 @endforeach
                             </x-slot>
@@ -62,13 +51,16 @@
                 </div>
             </div>
         </section>
-        <div class="ml-auto mt-5">
-            <a href="{{route('domains.create')}}">
-                <button
-                    class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
-                    Add Domain
-                </button>
-            </a>
-        </div>
+        {{$domains->links()}}
+        @can('pic')
+            <div class="ml-auto mt-5">
+                <a href="{{route('domains.create')}}">
+                    <button
+                        class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
+                        Add Domain
+                    </button>
+                </a>
+            </div>
+        @endcan
     </div>
 </x-layouts.dashboard>
