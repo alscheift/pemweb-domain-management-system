@@ -34,26 +34,13 @@
                                         <x-table.td>{{$domain->server->name}}</x-table.td>
                                         <x-table.td>{{$domain->server->unit->name}}</x-table.td>
 
-                                        <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                            <div class="flex items-center gap-x-6">
-                                                <a href="{{route('domains.update',$domain->getRouteKey())}}/edit">
-                                                    <button
-                                                        class="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
-                                                        Update
-                                                    </button>
-                                                </a>
-
-                                                <form method="POST"
-                                                      action="{{route('domains.destroy',$domain->getRouteKey())}}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button
-                                                        class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
-                                                        Delete
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </td>
+                                        <x-table.actions>
+                                            <x-table.btn-update
+                                                route="{{route('domains.update',$domain->getRouteKey())}}/edit"/>
+                                            <x-table.btn-delete
+                                                text="{{$domain->url}}"
+                                                route="{{route('domains.destroy',$domain->getRouteKey())}}"/>
+                                        </x-table.actions>
                                     </tr>
                                 @endforeach
                             </x-slot>
