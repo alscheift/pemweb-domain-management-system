@@ -8,7 +8,7 @@
                 @method('patch')
 
                 <div class="grid grid-cols-1 gap-6 mt-4">
-                    <x-forms.input name="name">Name</x-forms.input>
+                    <x-forms.input name="name" value="{{old('name',$server->name)}}"/>
 
                     <x-forms.select name="server_type" labelName="Server Type">
                         <option disabled>Choose Server Type</option>
@@ -24,10 +24,10 @@
                     </x-forms.select>
 
 
-                    <x-forms.input name="ip_address">IP address</x-forms.input>
-                    <x-forms.input name="processor">Processor</x-forms.input>
-                    <x-forms.input name="core_processor_count">Core Processor Count</x-forms.input>
-                    <x-forms.input name="ram">RAM</x-forms.input>
+                    <x-forms.input name="ip_address" value="{{old('ip_address',$server->ip_address)}}" labelName="IP Address"/>
+                    <x-forms.input name="processor" value="{{old('processor',$server->processor)}}"/>
+                    <x-forms.input name="core_processor_count" value="{{old('core_processor_count',$server->core_processor_count)}}" labelName="Core Processor Count"/>
+                    <x-forms.input name="ram" value="{{old('ram',$server->ram)}}" labelName="RAM"/>
 
                     <x-forms.select name="unit_id" labelName="Unit">
                         <option disabled>Choose Unit</option>
@@ -35,7 +35,7 @@
                             <option value="{{$unit->id}}" {{ old('unit_id') == $unit->id ? 'selected' : '' }}>{{$unit->name}}</option>
                         @endforeach
                     </x-forms.select>
-                    
+
                 </div>
 
                 <div class="flex justify-end mt-6">

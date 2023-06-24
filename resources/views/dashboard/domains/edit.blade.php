@@ -12,17 +12,11 @@
                         <input id="user_id" name="user_id" value="{{auth()->user()->id}}"/>
                     </div>
 
-                    <x-forms.input name="name">Name</x-forms.input>
-                    <x-forms.input name="url">URL</x-forms.input>
-                    <x-forms.input name="description">Description</x-forms.input>
-                    <x-forms.input name="application_type">Application Type</x-forms.input>
-                    <x-forms.input name="port">PORT</x-forms.input>
-                    <div>
-                        <label class="text-gray-700 dark:text-gray-200" for="name">Name</label>
-                        <input id="name" name="name" type="text"
-                               value="{{old('name') ?? $domain->name}}"
-                               class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                    </div>
+                    <x-forms.input name="name" value="{{old('name',$domain->name)}}"/>
+                    <x-forms.input name="url" value="{{old('url',$domain->url)}}" labelName="URL"/>
+                    <x-forms.input name="description" value="{{old('description',$domain->description)}}"/>
+                    <x-forms.input name="application_type" value="{{old('application_type',$domain->application_type)}}" labelName="Application Type"/>
+                    <x-forms.input name="port" value="{{old('port',$domain->port)}}" labelName="PORT"/>
 
                     <x-forms.select name="server_id" labelName="Server">
                         <option disabled>Choose Server (Unit)</option>

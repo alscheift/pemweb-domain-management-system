@@ -8,9 +8,9 @@
 
                 <div class="grid grid-cols-1 gap-6 mt-4">
                     <div>
-                        <x-forms.input name="name">Name</x-forms.input>
-                        <x-forms.input name="description">Description</x-forms.input>
-                        <x-forms.input name="higher_domain">Higher Domain</x-forms.input>
+                        <x-forms.input name="name"/>
+                        <x-forms.input name="description"/>
+                        <x-forms.input name="higher_domain" labelName="Higher Domain"/>
                     </div>
 
                     <div class="flex justify-end mt-6">
@@ -20,6 +20,7 @@
                             Save
                         </button>
                     </div>
+                </div>
             </form>
         </section>
     </div>
