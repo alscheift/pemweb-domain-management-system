@@ -1,6 +1,6 @@
 @props(['name' => 'any', 'labelName' => null, 'type' => 'text'])
 
-<div>
+<div class="mb-4">
     <label class="text-gray-700 dark:text-gray-200" for="{{$name}}">{{$slot}}</label>
     <input id="{{$name}}" name="{{$name}}" type="{{$type}}"
            value="{{old($name)??''}}"

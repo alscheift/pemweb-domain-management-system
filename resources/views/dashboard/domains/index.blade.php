@@ -4,97 +4,35 @@
             <div class="flex flex-col">
                 <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                        <div
-                            class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
-                            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                                <thead class="bg-gray-50 dark:bg-gray-800">
+                        <x-table>
+                            <x-slot name="thead">
                                 <tr>
-                                    <th scope="col"
-                                        class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        <div class="flex items-center gap-x-3">
-                                            <button class="flex items-center gap-x-2">ID</button>
-                                        </div>
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        Name
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        Description
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        Url
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        Application Type
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        Port
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        HTTP Status
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        Server
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        Unit
-                                    </th>
-
+                                    <x-table.th>ID</x-table.th>
+                                    <x-table.th>Name</x-table.th>
+                                    <x-table.th>Description</x-table.th>
+                                    <x-table.th>Url</x-table.th>
+                                    <x-table.th>Application Type</x-table.th>
+                                    <x-table.th>Port</x-table.th>
+                                    <x-table.th>HTTP Status</x-table.th>
+                                    <x-table.th>Server</x-table.th>
+                                    <x-table.th>Unit</x-table.th>
                                     <th scope="col" class="relative py-3.5 px-4">
                                         <span class="sr-only">Actions</span>
                                     </th>
                                 </tr>
-                                </thead>
-                                <tbody
-                                    class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+                            </x-slot>
+                            <x-slot name="tbody">
                                 @foreach(\App\Models\Domain::all() as $domain)
                                     <tr>
-                                        <td class="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
-                                            <div class="inline-flex items-center gap-x-3">
-
-                                                <span>{{$domain->id}}</span>
-                                            </div>
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$domain->name}}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$domain->description}}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$domain->url}}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$domain->application_type}}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$domain->port}}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$domain->http_status}}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$domain->server->name}}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$domain->server->unit->name}}
-                                        </td>
+                                        <x-table.td>{{$domain->id}}</x-table.td>
+                                        <x-table.td>{{$domain->name}}</x-table.td>
+                                        <x-table.td>{{$domain->description}}</x-table.td>
+                                        <x-table.td>{{$domain->url}}</x-table.td>
+                                        <x-table.td>{{$domain->application_type}}</x-table.td>
+                                        <x-table.td>{{$domain->port}}</x-table.td>
+                                        <x-table.td>{{$domain->http_status}}</x-table.td>
+                                        <x-table.td>{{$domain->server->name}}</x-table.td>
+                                        <x-table.td>{{$domain->server->unit->name}}</x-table.td>
 
                                         <td class="px-4 py-4 text-sm whitespace-nowrap">
                                             <div class="flex items-center gap-x-6">
@@ -106,7 +44,7 @@
                                                 </a>
 
                                                 <form method="POST"
-                                                    action="{{route('domains.destroy',$domain->getRouteKey())}}">
+                                                      action="{{route('domains.destroy',$domain->getRouteKey())}}">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button
@@ -118,9 +56,8 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                            </x-slot>
+                        </x-table>
                     </div>
                 </div>
             </div>

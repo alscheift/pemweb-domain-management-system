@@ -4,93 +4,42 @@
             <div class="flex flex-col">
                 <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                        <div
-                            class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
-                            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                                <thead class="bg-gray-50 dark:bg-gray-800">
+                        <x-table>
+                            <x-slot name="thead">
                                 <tr>
-                                    <th scope="col"
-                                        class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        <div class="flex items-center gap-x-3">
-                                            <button class="flex items-center gap-x-2">Name</button>
-                                        </div>
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        Username
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        Email
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        Phone
-                                    </th>
-
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        Unit
-                                    </th>
-
-                                    <th scope="col" class="relative py-3.5 px-4">
+                                    <x-table.th>Name</x-table.th>
+                                    <x-table.th>Username</x-table.th>
+                                    <x-table.th>Email</x-table.th>
+                                    <x-table.th>Phone</x-table.th>
+                                    <x-table.th>Unit</x-table.th>
+                                    <x-table.th>
                                         <span class="sr-only">Actions</span>
-                                    </th>
+                                    </x-table.th>
                                 </tr>
-                                </thead>
-                                <tbody
-                                    class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+                            </x-slot>
+                            <x-slot name="tbody">
                                 @foreach(\App\Models\User::all() as $user)
                                     @if($user->is_admin)
                                         @continue
                                     @endif
                                     <tr>
-                                        <td class="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
-                                            <div class="inline-flex items-center gap-x-3">
-
-                                                <span>{{$user->name}}</span>
-                                            </div>
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$user->username}}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$user->email}}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$user->phone}}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{$user->unit->name}}
-                                        </td>
-                                        <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                            <div class="flex items-center gap-x-6">
-                                                <a href="{{route('users.update',$user->getRouteKey())}}/edit">
-                                                    <button
-                                                        class="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
-                                                        Update
-                                                    </button>
-
-                                                </a>
-                                                <form method="POST"
-                                                      action="{{route('users.destroy',$user->getRouteKey())}}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button
-                                                        class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
-                                                        Delete
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </td>
+                                        <x-table.td>{{$user->name}}</x-table.td>
+                                        <x-table.td>{{$user->username}}</x-table.td>
+                                        <x-table.td>{{$user->email}}</x-table.td>
+                                        <x-table.td>{{$user->phone}}</x-table.td>
+                                        <x-table.td>{{$user->unit->name}}</x-table.td>
+                                        <x-table.actions>
+                                            <x-table.btn-update
+                                                route="{{route('users.update',$user->getRouteKey())}}/edit"/>
+                                            <x-table.btn-delete
+                                                route="{{route('users.destroy',$user->getRouteKey())}}"/>
+                                        </x-table.actions>
                                     </tr>
                                 @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+
+                            </x-slot>
+                        </x-table>
+
                     </div>
                 </div>
             </div>
