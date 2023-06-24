@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DomainController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ServerController;
 use App\Http\Controllers\SessionsController;
@@ -36,14 +37,6 @@ Route::post('logout', [SessionsController::class, 'destroy']);
 
 Route::get('test', [SessionsController::class, 'test']);
 
-// Servers
-Route::get('/servers', [ServerController::class, 'index'])->middleware('can:admin')->name('servers');
-Route::get('/servers/create', [ServerController::class, 'create'])->middleware('can:admin')->name('servers.create');
-Route::post('/servers', [ServerController::class, 'store'])->middleware('can:admin')->name('servers.store');
-Route::get('/servers/{server}/edit', [ServerController::class, 'edit'])->middleware('can:admin')->name('servers.edit');
-Route::patch('/servers/{server}', [ServerController::class, 'update'])->middleware('can:admin')->name('servers.update');
-Route::delete('/servers/{server}', [ServerController::class, 'destroy'])->middleware('can:admin')->name('servers.destroy');
-
 // Domains
 Route::get('/domains', [DomainController::class, 'index'])->middleware('auth')->name('domains');
 Route::get('/domains/create', [DomainController::class, 'create'])->middleware('auth')->name('domains.create');
@@ -52,19 +45,6 @@ Route::get('/domains/{domain}/edit', [DomainController::class, 'edit'])->middlew
 Route::patch('/domains/{domain}', [DomainController::class, 'update'])->middleware('auth')->name('domains.update');
 Route::delete('/domains/{domain}', [DomainController::class, 'destroy'])->middleware('auth')->name('domains.destroy');
 
-
-// Users
-Route::get('/users', [UserController::class, 'index'])->middleware('auth')->name('users');
-Route::get('/users/create', [UserController::class, 'create'])->middleware('can:admin')->name('users.create');
-Route::post('/users', [UserController::class, 'store'])->middleware('can:admin')->name('users.store');
-Route::get('/users/{user}/edit', [UserController::class, 'edit'])->middleware('can:admin')->name('users.edit');
-Route::patch('/users/{user}', [UserController::class, 'update'])->middleware('can:admin')->name('users.update');
-Route::delete('/users/{user}', [UserController::class, 'destroy'])->middleware('can:admin')->name('users.destroy');
-
-// Notifications
-Route::get('/notificationw', function () {
-    return view('dashboard.notifications.index');
-})->middleware('auth')->name('notifications');
 
 // Completions
 Route::get('/completions', function () {
@@ -75,6 +55,14 @@ Route::get('/completions', function () {
 Route::get('/reports', [ReportController::class, 'index'])->middleware('auth')->name('reports');
 
 Route::middleware('auth')->group(function () {
+    // Users
+    Route::get('/users', [UserController::class, 'index'])->middleware('can:admin')->name('users');
+    Route::get('/users/create', [UserController::class, 'create'])->middleware('can:admin')->name('users.create');
+    Route::post('/users', [UserController::class, 'store'])->middleware('can:admin')->name('users.store');
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->middleware('can:admin')->name('users.edit');
+    Route::patch('/users/{user}', [UserController::class, 'update'])->middleware('can:admin')->name('users.update');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->middleware('can:admin')->name('users.destroy');
+    
     // Units
     Route::get('/units', [UnitController::class, 'index'])->middleware('can:admin')->name('units');
     Route::get('/units/create', [UnitController::class, 'create'])->middleware('can:admin')->name('units.create');
@@ -82,4 +70,22 @@ Route::middleware('auth')->group(function () {
     Route::get('/units/{unit}/edit', [UnitController::class, 'edit'])->middleware('can:admin')->name('units.edit');
     Route::patch('/units/{unit}', [UnitController::class, 'update'])->middleware('can:admin')->name('units.update');
     Route::delete('/units/{unit}', [UnitController::class, 'destroy'])->middleware('can:admin')->name('units.destroy');
+
+    // Servers
+    Route::get('/servers', [ServerController::class, 'index'])->name('servers');
+    Route::get('/servers/create', [ServerController::class, 'create'])->middleware('can:pic')->name('servers.create');
+    Route::post('/servers', [ServerController::class, 'store'])->middleware('can:pic')->name('servers.store');
+    Route::get('/servers/{server}/edit', [ServerController::class, 'edit'])->middleware('can:pic')->name('servers.edit');
+    Route::patch('/servers/{server}', [ServerController::class, 'update'])->middleware('can:pic')->name('servers.update');
+    Route::delete('/servers/{server}', [ServerController::class, 'destroy'])->middleware('can:pic')->name('servers.destroy');
+
+    
+
+    // Notifications
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
+    Route::get('/notifications/create', [NotificationController::class, 'create'])->middleware('can:admin')->name('notifications.create');
+    Route::post('/notifications', [NotificationController::class, 'store'])->middleware('can:admin')->name('notifications.store');
+    Route::get('/notifications/{unit}/edit', [NotificationController::class, 'edit'])->middleware('can:admin')->name('notifications.edit');
+    Route::patch('/notifications/{unit}', [NotificationController::class, 'update'])->middleware('can:admin')->name('notifications.update');
+    Route::delete('/notifications/{unit}', [NotificationController::class, 'destroy'])->middleware('can:admin')->name('notifications.destroy');
 });
