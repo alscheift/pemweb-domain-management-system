@@ -9,28 +9,23 @@
                     <div class="hidden">
                         <input id="user_id" name="user_id" value="{{auth()->user()->id}}"/>
                     </div>
-                    
+
                     <x-forms.input name="name">Name</x-forms.input>
                     <x-forms.input name="url">URL</x-forms.input>
                     <x-forms.input name="description">Description</x-forms.input>
                     <x-forms.input name="application_type">Application Type</x-forms.input>
                     <x-forms.input name="port">PORT</x-forms.input>
 
-                    <div>
-                        <label class="text-gray-700 dark:text-gray-200" for="name">Server</label>
-                        <select id="server_id"
-                                name="server_id"
-                                class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Choose Server (Unit)</option>
-                            @foreach(auth()->user()->unit->servers as $server)
-                                @if($server->status == 'Active')
-                                    <option @selected(old('server_id')==$server->id)
-                                            value="{{$server->id}}
+                    <x-forms.select name="server_id" labelName="Server">
+                        <option selected>Choose Server (Unit)</option>
+                        @foreach(auth()->user()->unit->servers as $server)
+                            @if($server->status == 'Active')
+                                <option @selected(old('server_id')==$server->id)
+                                        value="{{$server->id}}
                                     "> {{$server->name.' ('.$server->unit->name.')'}} </option>
-                                @endif
-                            @endforeach
-                        </select>
-                    </div>
+                            @endif
+                        @endforeach
+                    </x-forms.select>
 
                     <div>
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="images">Screenshot Website View</label>
