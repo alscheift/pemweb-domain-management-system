@@ -9,7 +9,7 @@
                 <div class="grid grid-cols-1 gap-6 mt-4">
                     <div>
 
-                        <x-forms.input name="name">Name</x-forms.input>
+                        <x-forms.input name="name"/>
 
                         <x-forms.select name="server_type" labelName="Server Type">
                             <option selected>Choose Server Type</option>
@@ -25,10 +25,10 @@
                         </x-forms.select>
 
 
-                        <x-forms.input name="ip_address">IP address</x-forms.input>
-                        <x-forms.input name="processor">Processor</x-forms.input>
-                        <x-forms.input name="core_processor_count">Core Processor Count</x-forms.input>
-                        <x-forms.input name="ram">RAM</x-forms.input>
+                        <x-forms.input name="ip_address" labelName="IP Address"/>
+                        <x-forms.input name="processor"/>
+                        <x-forms.input name="core_processor_count" labelName="Core Processor Count"/>
+                        <x-forms.input name="ram" labelName="RAM"/>
 
                         <x-forms.select name="unit_id" labelName="Unit">
                             <option selected>Choose Unit</option>

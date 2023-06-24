@@ -14,12 +14,12 @@
                         @endforeach
                     </x-forms.select>
 
-                    <x-forms.input name="name">Name</x-forms.input>
-                    <x-forms.input name="username">Username</x-forms.input>
-                    <x-forms.input name="phone">Phone Number</x-forms.input>
-                    <x-forms.input name="email">Email Address</x-forms.input>
-                    <x-forms.input name="password">Password</x-forms.input>
-                    <x-forms.input name="passwordConfirmation">Password Confirmation</x-forms.input>
+                    <x-forms.input name="name"/>
+                    <x-forms.input name="username"/>
+                    <x-forms.input name="phone" labelName="Phone Number"/>
+                    <x-forms.input name="email" labelName="Email Address"/>
+                    <x-forms.input name="password"/>
+                    <x-forms.input name="passwordConfirmation" labelName="Password Confirmation"/>
 
                 </div>
 

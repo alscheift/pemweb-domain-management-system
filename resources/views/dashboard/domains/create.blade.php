@@ -10,11 +10,11 @@
                         <input id="user_id" name="user_id" value="{{auth()->user()->id}}"/>
                     </div>
 
-                    <x-forms.input name="name">Name</x-forms.input>
-                    <x-forms.input name="url">URL</x-forms.input>
-                    <x-forms.input name="description">Description</x-forms.input>
-                    <x-forms.input name="application_type">Application Type</x-forms.input>
-                    <x-forms.input name="port">PORT</x-forms.input>
+                    <x-forms.input name="name"/>
+                    <x-forms.input name="url" labelName="URL"/>
+                    <x-forms.input name="description"/>
+                    <x-forms.input name="application_type" labelName="Application Type"/>
+                    <x-forms.input name="port" labelName="PORT"/>
 
                     <x-forms.select name="server_id" labelName="Server">
                         <option selected>Choose Server (Unit)</option>

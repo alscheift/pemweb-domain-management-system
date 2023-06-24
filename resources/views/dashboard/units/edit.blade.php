@@ -7,10 +7,9 @@
                 @csrf
                 @method('patch')
                 <div class="grid grid-cols-1 gap-6 mt-4">
-                    <x-forms.input name="name">Name</x-forms.input>
-                    <x-forms.input name="description">Name</x-forms.input>
-                    <x-forms.input name="higher_domain">Higher Domain</x-forms.input>
-
+                    <x-forms.input name="name" value="{{old('processor',$unit->processor)}}"/>
+                    <x-forms.input name="description" value="{{old('description',$unit->description)}}"/>
+                    <x-forms.input name="higher_domain" value="{{old('higher_domain',$unit->higher_domain)}}" labelName="Higher Domain"/>
                 </div>
 
                 <div class="flex justify-end mt-6">
