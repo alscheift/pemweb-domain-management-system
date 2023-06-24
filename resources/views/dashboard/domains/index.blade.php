@@ -22,7 +22,7 @@
                                 </tr>
                             </x-slot>
                             <x-slot name="tbody">
-                                @foreach(\App\Models\Domain::all() as $domain)
+                                @foreach($domains as $domain)
                                     <tr>
                                         <x-table.td>{{$domain->id}}</x-table.td>
                                         <x-table.td>{{$domain->name}}</x-table.td>
@@ -35,11 +35,13 @@
                                         <x-table.td>{{$domain->server->unit->name}}</x-table.td>
 
                                         <x-table.actions>
-                                            <x-table.btn-update
-                                                route="{{route('domains.update',$domain->getRouteKey())}}/edit"/>
-                                            <x-table.btn-delete
-                                                text="{{$domain->url}}"
-                                                route="{{route('domains.destroy',$domain->getRouteKey())}}"/>
+                                            @can('pic')
+                                                <x-table.btn-update
+                                                    route="{{route('domains.update',$domain->getRouteKey())}}/edit"/>
+                                                <x-table.btn-delete
+                                                    text="{{$domain->url}}"
+                                                    route="{{route('domains.destroy',$domain->getRouteKey())}}"/>
+                                            @endcan
                                         </x-table.actions>
                                     </tr>
                                 @endforeach
@@ -49,13 +51,16 @@
                 </div>
             </div>
         </section>
-        <div class="ml-auto mt-5">
-            <a href="{{route('domains.create')}}">
-                <button
-                    class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
-                    Add Domain
-                </button>
-            </a>
-        </div>
+        {{$domains->links()}}
+        @can('pic')
+            <div class="ml-auto mt-5">
+                <a href="{{route('domains.create')}}">
+                    <button
+                        class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
+                        Add Domain
+                    </button>
+                </a>
+            </div>
+        @endcan
     </div>
 </x-layouts.dashboard>
