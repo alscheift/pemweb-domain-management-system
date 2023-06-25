@@ -51,9 +51,26 @@
                 </div>
             </div>
         </section>
-        {{$domains->links()}}
-        @can('pic')
-            <div class="ml-auto mt-5">
+        <div class="grid grid-cols-2 gap-5 mt-5">
+            <div class="p-4 mr-auto">
+                @if ($domains->currentPage() > 1)
+                    <a href="{{ $domains->previousPageUrl() }}">
+                        <button class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600">
+                            Previous
+                        </button>
+                    </a>
+                @endif
+
+                @if ($domains->hasMorePages())
+                    <a href="{{ $domains->nextPageUrl() }}">
+                        <button class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600">
+                            Next
+                        </button>
+                    </a>
+                @endif
+            </div>
+            @can('pic')
+            <div class="p-4 ml-auto">
                 <a href="{{route('domains.create')}}">
                     <button
                         class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
@@ -61,6 +78,7 @@
                     </button>
                 </a>
             </div>
-        @endcan
+            @endcan
+        </div>
     </div>
 </x-layouts.dashboard>
