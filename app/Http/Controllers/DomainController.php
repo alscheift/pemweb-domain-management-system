@@ -20,10 +20,10 @@ class DomainController extends Controller
     {
 
         if(auth()->user()->is_admin == 1){
-            $domains = Domain::paginate(10);
+            $domains = Domain::paginate(8);
         }
         else{
-            $domains = auth()->user()->unit->domains()->paginate(10);
+            $domains = auth()->user()->unit->domains()->paginate(8);
         }
         return view('dashboard.domains.index', compact('domains'));
     }

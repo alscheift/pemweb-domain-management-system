@@ -16,13 +16,15 @@
                     <x-forms.input name="url" value="{{old('url',$domain->url)}}" labelName="URL"/>
                     <x-forms.input name="description" value="{{old('description',$domain->description)}}"/>
                     <x-forms.input name="application_type" value="{{old('application_type',$domain->application_type)}}" labelName="Application Type"/>
-                    <x-forms.input name="port" value="{{old('port',$domain->port)}}" labelName="PORT"/>
+                    <x-forms.input name="port" value="{{old('port',$domain->port)}}" labelName="PORT" type="number"/>
 
                     <x-forms.select name="server_id" labelName="Server">
                         <option disabled>Choose Server (Unit)</option>
                         @foreach(\App\Models\Server::all() as $server)
                             @if($server->status == 'Active')
-                                <option value="{{$server->id}}" {{ old('server_id') == $server->id ? 'selected' : '' }}> {{$server->name.' ('.$server->unit->name.')'}} </option>
+                                <option value="{{$server->id}}" {{ old('server_id') == $server->id ? 'selected' : '' }}> 
+                                    {{$server->name.' ('.$server->unit->name.')'}} 
+                                </option>
                             @endif
                         @endforeach
                     </x-forms.select>
