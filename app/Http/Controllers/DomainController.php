@@ -17,14 +17,13 @@ class DomainController extends Controller
 {
     public function index(): View
     {
-        $domains = [];
 
-        if (auth()->user()->can('admin')) {
-            $domains = Domain::all()->paginate(10);
-        } else if (auth()->user()->can('pic')) {
+        if(auth()->user()->is_admin == 1){
+            $domains = Domain::paginate(10);
+        }
+        else{
             $domains = auth()->user()->unit->domains()->paginate(10);
         }
-
         return view('dashboard.domains.index', compact('domains'));
     }
 
