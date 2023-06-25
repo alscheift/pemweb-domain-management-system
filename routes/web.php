@@ -39,9 +39,9 @@ Route::get('test', [SessionsController::class, 'test']);
 
 
 // Completions
-Route::get('/completions', function () {
-    return view('dashboard.completions.index');
-})->middleware('auth')->name('completions');
+Route::get('/solutions', function () {
+    return view('dashboard.solutions.index');
+})->middleware('auth')->name('solutions');
 
 // Reports
 Route::get('/reports', [ReportController::class, 'index'])->middleware('auth')->name('reports');

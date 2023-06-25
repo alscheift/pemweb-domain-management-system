@@ -74,9 +74,9 @@
                     Notifcations
                 </a>
                 
-                <a href="{{route('completions')}}" class="{{isActive('completions')}}">
+                <a href="{{route('solutions')}}" class="{{isActive('solutions')}}">
                     <div class="text-gray-400 group-hover:text-gray-300 mr-3 flex-shrink-0 h-6 w-6">
-                        <x-svg name="completions"/>
+                        <x-svg name="solutions"/>
                     </div>
                     Completion Target
                 </a>
