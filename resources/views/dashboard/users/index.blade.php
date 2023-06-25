@@ -18,7 +18,7 @@
                                 </tr>
                             </x-slot>
                             <x-slot name="tbody">
-                                @foreach(\App\Models\User::all() as $user)
+                                @foreach($users as $user)
                                     @if($user->is_admin)
                                         @continue
                                     @endif
@@ -44,13 +44,32 @@
                 </div>
             </div>
         </section>
-        <div class="ml-auto mt-5">
-            <a href="{{route('users.create')}}">
-                <button
-                    class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
-                    Add User
-                </button>
-            </a>
+        <div class="grid grid-cols-2 gap-5 mt-5">
+            <div class="p-4 mr-auto">
+                @if ($users->currentPage() > 1)
+                    <a href="{{ $users->previousPageUrl() }}">
+                        <button class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600">
+                            Previous
+                        </button>
+                    </a>
+                @endif
+
+                @if ($users->hasMorePages())
+                    <a href="{{ $users->nextPageUrl() }}">
+                        <button class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600">
+                            Next
+                        </button>
+                    </a>
+                @endif
+            </div>
+            <div class="p-4 ml-auto">
+                <a href="{{route('users.create')}}">
+                    <button
+                        class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
+                        Add User
+                    </button>
+                </a>
+            </div>
         </div>
     </div>
 </x-layouts.dashboard>

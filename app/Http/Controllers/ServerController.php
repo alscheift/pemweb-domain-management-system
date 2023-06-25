@@ -9,9 +9,26 @@ use Illuminate\View\View;
 
 class ServerController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        return view('dashboard.servers.index');
+        $search = $request->input('search');
+        $servers = Server::query();
+
+        if($search) {
+            $servers = Server::where('id', 'like', "%$search%")
+                ->orWhere('name', 'like', "%$search%")
+                ->orWhere('server_type', 'like', "%$search%")
+                ->orWhere('status', 'like', "%$search%")
+                ->orWhere('ip_address', 'like', "%$search%")
+                ->orWhere('processor', 'like', "%$search%")
+                ->orWhere('core_processor_count', 'like', "%$search%")
+                ->orWhere('ram', 'like', "%$search%")
+                ->orWhere('unit_id', 'like', "%$search%");
+        }
+
+        $servers = $servers->paginate(8);
+
+        return view('dashboard.servers.index', compact('servers'));
     }
 
     public function store(): RedirectResponse
