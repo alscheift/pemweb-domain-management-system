@@ -14,6 +14,10 @@ class ServerController extends Controller
         $search = $request->input('search');
         $servers = Server::query();
 
+        if(auth()->user()->is_admin != 1){
+            $servers = $servers->where('unit_id', auth()->user()->unit_id);
+        }
+
         if($search) {
             $servers = Server::where('id', 'like', "%$search%")
                 ->orWhere('name', 'like', "%$search%")
