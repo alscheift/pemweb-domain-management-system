@@ -62,6 +62,24 @@ class DatabaseSeeder extends Seeder
             'higher_domain' => 'fh.uns.ac.id'
         ]);
 
+        $unit6 = Unit::create([
+            'name' => 'FIB',
+            'description' => 'Unit FIB',
+            'higher_domain' => 'fib.uns.ac.id'
+        ]);
+
+        $unit7 = Unit::create([
+            'name' => 'FT',
+            'description' => 'Unit FT',
+            'higher_domain' => 'ft.uns.ac.id'
+        ]);
+
+        $unit8 = Unit::create([
+            'name' => 'FISIP',
+            'description' => 'Unit FISIP',
+            'higher_domain' => 'fisip.uns.ac.id'
+        ]);
+
         $user1 = User::factory()->create([
             'username' => 'user1',
             'password' => bcrypt('user'),
@@ -71,19 +89,43 @@ class DatabaseSeeder extends Seeder
         $user2 = User::factory()->create([
             'username' => 'user2',
             'password' => bcrypt('user'),
-            'unit_id' => $unit1->id
+            'unit_id' => $unit2->id
         ]);
 
         $user3 = User::factory()->create([
             'username' => 'user3',
             'password' => bcrypt('user'),
-            'unit_id' => $unit2->id
+            'unit_id' => $unit3->id
         ]);
 
         $user4 = User::factory()->create([
             'username' => 'user4',
             'password' => bcrypt('user'),
-            'unit_id' => $unit2->id
+            'unit_id' => $unit4->id
+        ]);
+
+        $user5 = User::factory()->create([
+            'username' => 'user5',
+            'password' => bcrypt('user'),
+            'unit_id' => $unit5->id
+        ]);
+
+        $user6 = User::factory()->create([
+            'username' => 'user6',
+            'password' => bcrypt('user'),
+            'unit_id' => $unit6->id
+        ]);
+
+        $user7 = User::factory()->create([
+            'username' => 'user7',
+            'password' => bcrypt('user'),
+            'unit_id' => $unit7->id
+        ]);
+
+        $user8 = User::factory()->create([
+            'username' => 'user8',
+            'password' => bcrypt('user'),
+            'unit_id' => $unit8->id
         ]);
 
         $server1 = Server::create([
@@ -130,6 +172,137 @@ class DatabaseSeeder extends Seeder
             'unit_id' => $unit2->id
         ]);
 
+        $server5 = Server::create([
+            'name' => 'webserverfkip',
+            'server_type' => 'Physical',
+            'status' => 'Active',
+            'ip_address' => '192.168.2.1',
+            'processor' => 'AMD Ryzen 5 3700X',
+            'core_processor_count' => '4',
+            'ram' => '16',
+            'unit_id' => $unit3->id
+        ]);
+
+        $server6 = Server::create([
+            'name' => 'mailserverfkip',
+            'server_type' => 'Virtual',
+            'status' => 'No Active',
+            'ip_address' => '192.168.2.2',
+            'processor' => 'AMD Ryzen 7 3700X',
+            'core_processor_count' => '2',
+            'ram' => '8',
+            'unit_id' => $unit3->id
+        ]);
+
+        $server7 = Server::create([
+            'name' => 'webserverfatisda',
+            'server_type' => 'Physical',
+            'status' => 'Active',
+            'ip_address' => '192.168.2.1',
+            'processor' => 'AMD Ryzen 5 3700X',
+            'core_processor_count' => '4',
+            'ram' => '16',
+            'unit_id' => $unit4->id
+        ]);
+
+        $server8 = Server::create([
+            'name' => 'mailserverfatisda',
+            'server_type' => 'Virtual',
+            'status' => 'No Active',
+            'ip_address' => '192.168.2.2',
+            'processor' => 'AMD Ryzen 7 3700X',
+            'core_processor_count' => '2',
+            'ram' => '8',
+            'unit_id' => $unit4->id
+        ]);
+
+        $server9 = Server::create([
+            'name' => 'webserverfh',
+            'server_type' => 'Physical',
+            'status' => 'Active',
+            'ip_address' => '192.168.2.1',
+            'processor' => 'AMD Ryzen 5 3700X',
+            'core_processor_count' => '4',
+            'ram' => '16',
+            'unit_id' => $unit5->id
+        ]);
+
+        $server10 = Server::create([
+            'name' => 'mailserverfh',
+            'server_type' => 'Virtual',
+            'status' => 'No Active',
+            'ip_address' => '192.168.2.2',
+            'processor' => 'AMD Ryzen 7 3700X',
+            'core_processor_count' => '2',
+            'ram' => '8',
+            'unit_id' => $unit5->id
+        ]);
+
+        $server11 = Server::create([
+            'name' => 'webserverfib',
+            'server_type' => 'Physical',
+            'status' => 'Active',
+            'ip_address' => '192.168.2.1',
+            'processor' => 'AMD Ryzen 5 3700X',
+            'core_processor_count' => '4',
+            'ram' => '16',
+            'unit_id' => $unit6->id
+        ]);
+
+        $server12 = Server::create([
+            'name' => 'mailserverfib',
+            'server_type' => 'Virtual',
+            'status' => 'No Active',
+            'ip_address' => '192.168.2.2',
+            'processor' => 'AMD Ryzen 7 3700X',
+            'core_processor_count' => '2',
+            'ram' => '8',
+            'unit_id' => $unit6->id
+        ]);
+
+        $server13 = Server::create([
+            'name' => 'webserverft',
+            'server_type' => 'Physical',
+            'status' => 'Active',
+            'ip_address' => '192.168.2.1',
+            'processor' => 'AMD Ryzen 5 3700X',
+            'core_processor_count' => '4',
+            'ram' => '16',
+            'unit_id' => $unit7->id
+        ]);
+
+        $server14 = Server::create([
+            'name' => 'mailserverft',
+            'server_type' => 'Virtual',
+            'status' => 'No Active',
+            'ip_address' => '192.168.2.2',
+            'processor' => 'AMD Ryzen 7 3700X',
+            'core_processor_count' => '2',
+            'ram' => '8',
+            'unit_id' => $unit7->id
+        ]);
+
+        $server15 = Server::create([
+            'name' => 'webserverfisip',
+            'server_type' => 'Physical',
+            'status' => 'Active',
+            'ip_address' => '192.168.2.1',
+            'processor' => 'AMD Ryzen 5 3700X',
+            'core_processor_count' => '4',
+            'ram' => '16',
+            'unit_id' => $unit8->id
+        ]);
+
+        $server16 = Server::create([
+            'name' => 'mailserverfisip',
+            'server_type' => 'Virtual',
+            'status' => 'No Active',
+            'ip_address' => '192.168.2.2',
+            'processor' => 'AMD Ryzen 7 3700X',
+            'core_processor_count' => '2',
+            'ram' => '8',
+            'unit_id' => $unit8->id
+        ]);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }

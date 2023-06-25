@@ -21,7 +21,7 @@ class UnitController extends Controller
                 ->orWhere('higher_domain', 'like', "%$search%");
         }
 
-        $units = $units->paginate(7);
+        $units = $units->paginate(8);
 
         return view('dashboard.units.index', compact('units'));
     }

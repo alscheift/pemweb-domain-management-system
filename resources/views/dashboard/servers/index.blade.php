@@ -25,7 +25,7 @@
                                 </tr>
                             </x-slot>
                             <x-slot name="tbody">
-                                @foreach(\App\Models\Server::all() as $server)
+                                @foreach($servers as $server)
                                     <tr>
                                         <x-table.td>{{$server->id}}</x-table.td>
                                         <x-table.td>{{$server->name}}</x-table.td>
@@ -54,15 +54,34 @@
             </div>
         </section>
         
-        @can('pic')
-        <div class="mt-5 ml-auto">
-            <a href="{{route('servers.create')}}">
-                <button
-                    class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
-                    Add Server
-                </button>
-            </a>
+        <div class="grid grid-cols-2 gap-5 mt-5">
+            <div class="p-4 mr-auto">
+                @if ($servers->currentPage() > 1)
+                    <a href="{{ $servers->previousPageUrl() }}">
+                        <button class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600">
+                            Previous
+                        </button>
+                    </a>
+                @endif
+
+                @if ($servers->hasMorePages())
+                    <a href="{{ $servers->nextPageUrl() }}">
+                        <button class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600">
+                            Next
+                        </button>
+                    </a>
+                @endif
+            </div>
+            @can('pic')
+            <div class="p-4 ml-auto">
+                <a href="{{route('servers.create')}}">
+                    <button
+                        class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
+                        Add Server
+                    </button>
+                </a>
+            </div>
+            @endcan
         </div>
-        @endcan
     </div>
 </x-layouts.dashboard>

@@ -11,9 +11,22 @@ use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        return view('dashboard.users.index');
+        $search = $request->input('search');
+        $users = User::query()->where('is_admin', false);
+
+        if ($search) {
+            $users = User::where('id', 'like', "%$search%")
+                ->orWhere('username', 'like', "%$search%")
+                ->orWhere('name', 'like', "%$search%")
+                ->orWhere('email', 'like', "%$search%")
+                ->orWhere('phone', 'like', "%$search%");
+        }
+
+        $users = $users->paginate(8);
+
+        return view('dashboard.users.index', compact('users'));
     }
 
     public function store(): RedirectResponse
