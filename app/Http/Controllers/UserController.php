@@ -37,7 +37,7 @@ class UserController extends Controller
 
             'name' => 'required',
             'email' => 'required|email',
-            'phone' => 'required|phone',
+            'phone' => ['required', 'regex:/^(\+62)\d{10,12}$/'],
             'unit_id' => ''
         ]);
 
@@ -62,7 +62,7 @@ class UserController extends Controller
             'username' => 'required',
             'name' => 'required',
             'email' => 'required|email',
-            'phone' => 'required|phone',
+            'phone' => ['required', 'regex:/^(\+62)\d{10,12}$/'],
             'unit_id' => ''
         ]);
 
