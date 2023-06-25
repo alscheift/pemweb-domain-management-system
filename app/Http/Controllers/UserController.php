@@ -24,13 +24,13 @@ class UserController extends Controller
 
             'name' => 'required',
             'email' => 'required|email',
-            'phone' => 'required',
+            'phone' => 'required|phone',
             'unit_id' => ''
         ]);
 
         User::create($attributes);
 
-        return redirect(route('users'))->with('success', 'User berhasil ditambahkan');
+        return redirect(route('users'))->with('success', 'User added successfully');
     }
 
     public function create(): View
@@ -49,19 +49,19 @@ class UserController extends Controller
             'username' => 'required',
             'name' => 'required',
             'email' => 'required|email',
-            'phone' => 'required',
+            'phone' => 'required|phone',
             'unit_id' => ''
         ]);
 
         $user->update($attributes);
 
-        return redirect(route('users'))->with('success', 'User berhasil diupdate');
+        return redirect(route('users'))->with('success', 'User updated successfully');
     }
 
     public function destroy(User $user): RedirectResponse
     {
         $user->delete();
 
-        return redirect(route('users'))->with('success', 'User berhasil dihapus');
+        return redirect(route('users'))->with('success', 'User deleted successfully');
     }
 }

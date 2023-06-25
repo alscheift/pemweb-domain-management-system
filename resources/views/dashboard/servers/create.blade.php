@@ -27,8 +27,8 @@
 
                         <x-forms.input name="ip_address" labelName="IP Address"/>
                         <x-forms.input name="processor"/>
-                        <x-forms.input name="core_processor_count" labelName="Core Processor Count"/>
-                        <x-forms.input name="ram" labelName="RAM"/>
+                        <x-forms.input name="core_processor_count" labelName="Core Processor Count" type="number"/>
+                        <x-forms.input name="ram" labelName="RAM" type="number"/>
 
                         <x-forms.select name="unit_id" labelName="Unit">
                             <option selected>Choose Unit</option>

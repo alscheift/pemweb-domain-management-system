@@ -50,8 +50,8 @@ class ServerController extends Controller
             'status' => 'required',
             'ip_address' => 'required',
             'processor' => 'required',
-            'core_processor_count' => 'required',
-            'ram' => 'required',
+            'core_processor_count' => 'required | numeric | min:1',
+            'ram' => 'required | numeric | min:1',
             'unit_id' => 'required',
         ]);
 

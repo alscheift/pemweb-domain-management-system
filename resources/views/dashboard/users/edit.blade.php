@@ -20,7 +20,7 @@
                     <x-forms.input name="name" value="{{old('name',$user->name)}}"/>
                     <x-forms.input name="username" value="{{old('name',$user->username)}}"/>
                     <x-forms.input name="phone" value="{{old('phone',$user->phone)}}" labelName="Phone Number"/>
-                    <x-forms.input name="email" value="{{old('email',$user->email)}}" labelName="Email Address"/>
+                    <x-forms.input name="email" value="{{old('email',$user->email)}}" labelName="Email Address" type="email"/>
 
                 </div>
 
