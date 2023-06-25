@@ -17,9 +17,9 @@
                     <x-forms.input name="name"/>
                     <x-forms.input name="username"/>
                     <x-forms.input name="phone" labelName="Phone Number"/>
-                    <x-forms.input name="email" labelName="Email Address"/>
-                    <x-forms.input name="password"/>
-                    <x-forms.input name="passwordConfirmation" labelName="Password Confirmation"/>
+                    <x-forms.input name="email" type="email" labelName="Email Address"/>
+                    <x-forms.input name="password" type="password"/>
+                    <x-forms.input name="passwordConfirmation" labelName="Password Confirmation" type="password"/>
 
                 </div>
 

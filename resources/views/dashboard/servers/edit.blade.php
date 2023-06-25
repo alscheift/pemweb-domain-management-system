@@ -26,8 +26,8 @@
 
                     <x-forms.input name="ip_address" value="{{old('ip_address',$server->ip_address)}}" labelName="IP Address"/>
                     <x-forms.input name="processor" value="{{old('processor',$server->processor)}}"/>
-                    <x-forms.input name="core_processor_count" value="{{old('core_processor_count',$server->core_processor_count)}}" labelName="Core Processor Count"/>
-                    <x-forms.input name="ram" value="{{old('ram',$server->ram)}}" labelName="RAM"/>
+                    <x-forms.input name="core_processor_count" value="{{old('core_processor_count',$server->core_processor_count)}}" labelName="Core Processor Count" type="number"/>
+                    <x-forms.input name="ram" value="{{old('ram',$server->ram)}}" labelName="RAM" type="number"/>
 
                     <x-forms.select name="unit_id" labelName="Unit">
                         <option disabled>Choose Unit</option>
