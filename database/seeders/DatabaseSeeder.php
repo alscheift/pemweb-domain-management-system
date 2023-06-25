@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
         $unit1 = Unit::create([
             'name' => 'FMIPA',
             'description' => 'Unit FMIPA',
-            'higher_domain' => 'fmipa.uns.ac.id'
+            'higher_domain' => 'mipa.uns.ac.id'
         ]);
 
         $unit2 = Unit::create([
@@ -59,7 +59,7 @@ class DatabaseSeeder extends Seeder
         $unit5 = Unit::create([
             'name' => 'FH',
             'description' => 'Unit FH',
-            'higher_domain' => 'fh.uns.ac.id'
+            'higher_domain' => 'hukum.uns.ac.id'
         ]);
 
         $unit6 = Unit::create([

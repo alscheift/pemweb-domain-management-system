@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Domain;
 use App\Models\DomainImages;
 use App\Models\Unit;
+use App\Models\Server;
 use App\Models\User;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Http\RedirectResponse;
@@ -31,14 +32,17 @@ class DomainController extends Controller
     {
         // assign http status using function
         $http_status = $this->checkHttpStatus(request('url'));
+        
+        $unit_id = Server::query()->where('id', request('server_id'))->value('unit_id');
+        $higher_domain = Unit::query()->where('id', $unit_id)->value('higher_domain');
 
         // validate request
         $attributes = request()->validate([
-            'url' => 'required',
+            'url' => ['required', 'regex:/^.*' . preg_quote($higher_domain, '/') . '$/'],
             'name' => 'required',
             'description' => 'required',
             'application_type' => 'required',
-            'port' => 'required',
+            'port' => 'required|numeric|min:1',
             'server_id' => 'required',
             'user_id' => 'required',
         ]);
@@ -74,7 +78,7 @@ class DomainController extends Controller
     public function checkHttpStatus($url)
     {
         try {
-            $response = Http::connectTimeout(1)->get($url, [
+            $response = Http::connectTimeout(2)->get($url, [
                 RequestOptions::ALLOW_REDIRECTS => false,
             ]);
             if ($response->ok()) {
@@ -102,16 +106,19 @@ class DomainController extends Controller
         $oldImage = DomainImages::where('domain_id', $domain->id)->first();
         $imagePath = $oldImage->images;
 
+        $unit_id = Server::query()->where('id', request('server_id'))->value('unit_id');
+        $higher_domain = Unit::query()->where('id', $unit_id)->value('higher_domain');
+
         // assign http status using function
         $http_status = $this->checkHttpStatus(request('url'));
 
         // validate request
         $attributes = request()->validate([
-            'url' => 'required',
+            'url' => ['required', 'regex:/^.*' . preg_quote($higher_domain, '/') . '$/'],
             'name' => 'required',
             'description' => 'required',
             'application_type' => 'required',
-            'port' => 'required',
+            'port' => 'required|numeric|min:1',
             'server_id' => 'required',
             'user_id' => 'required'
         ]);
