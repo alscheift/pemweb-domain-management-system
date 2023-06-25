@@ -37,14 +37,6 @@ Route::post('logout', [SessionsController::class, 'destroy']);
 
 Route::get('test', [SessionsController::class, 'test']);
 
-// Domains
-Route::get('/domains', [DomainController::class, 'index'])->middleware('auth')->name('domains');
-Route::get('/domains/create', [DomainController::class, 'create'])->middleware('auth')->name('domains.create');
-Route::post('/domains', [DomainController::class, 'store'])->middleware('auth')->name('domains.store');
-Route::get('/domains/{domain}/edit', [DomainController::class, 'edit'])->middleware('auth')->name('domains.edit');
-Route::patch('/domains/{domain}', [DomainController::class, 'update'])->middleware('auth')->name('domains.update');
-Route::delete('/domains/{domain}', [DomainController::class, 'destroy'])->middleware('auth')->name('domains.destroy');
-
 
 // Completions
 Route::get('/completions', function () {
@@ -79,7 +71,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/servers/{server}', [ServerController::class, 'update'])->middleware('can:pic')->name('servers.update');
     Route::delete('/servers/{server}', [ServerController::class, 'destroy'])->middleware('can:pic')->name('servers.destroy');
 
-    
+    // Domains
+    Route::get('/domains', [DomainController::class, 'index'])->name('domains');
+    Route::get('/domains/create', [DomainController::class, 'create'])->middleware('can:pic')->name('domains.create');
+    Route::post('/domains', [DomainController::class, 'store'])->middleware('can:pic')->name('domains.store');
+    Route::get('/domains/{domain}/edit', [DomainController::class, 'edit'])->middleware('can:pic')->name('domains.edit');
+    Route::patch('/domains/{domain}', [DomainController::class, 'update'])->middleware('can:pic')->name('domains.update');
+    Route::delete('/domains/{domain}', [DomainController::class, 'destroy'])->middleware('can:pic')->name('domains.destroy');
 
     // Notifications
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
