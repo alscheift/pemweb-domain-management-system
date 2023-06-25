@@ -1,48 +1,54 @@
 <x-layouts.dashboard>
+    <x-partials.form/>
+    
     <div class="py-4 flex flex-col">
         <section class="container mx-auto">
-            <div class="flex flex-col">
-                <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                        <x-table>
-                            <x-slot name="thead">
-                                <tr>
-                                    <x-table.th>Name</x-table.th>
-                                    <x-table.th>Username</x-table.th>
-                                    <x-table.th>Email</x-table.th>
-                                    <x-table.th>Phone</x-table.th>
-                                    <x-table.th>Unit</x-table.th>
-                                    <x-table.th>
-                                        <span class="sr-only">Actions</span>
-                                    </x-table.th>
-                                </tr>
-                            </x-slot>
-                            <x-slot name="tbody">
-                                @foreach($users as $user)
-                                    @if($user->is_admin)
-                                        @continue
-                                    @endif
+            @if ($users->count())
+                <div class="flex flex-col">
+                    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                            <x-table>
+                                <x-slot name="thead">
                                     <tr>
-                                        <x-table.td>{{$user->name}}</x-table.td>
-                                        <x-table.td>{{$user->username}}</x-table.td>
-                                        <x-table.td>{{$user->email}}</x-table.td>
-                                        <x-table.td>{{$user->phone}}</x-table.td>
-                                        <x-table.td>{{$user->unit->name}}</x-table.td>
-                                        <x-table.actions>
-                                            <x-table.btn-update
-                                                route="{{route('users.update',$user->getRouteKey())}}/edit"/>
-                                            <x-table.btn-delete
-                                                route="{{route('users.destroy',$user->getRouteKey())}}"/>
-                                        </x-table.actions>
+                                        <x-table.th>Name</x-table.th>
+                                        <x-table.th>Username</x-table.th>
+                                        <x-table.th>Email</x-table.th>
+                                        <x-table.th>Phone</x-table.th>
+                                        <x-table.th>Unit</x-table.th>
+                                        <x-table.th>
+                                            <span class="sr-only">Actions</span>
+                                        </x-table.th>
                                     </tr>
-                                @endforeach
+                                </x-slot>
+                                <x-slot name="tbody">
+                                    @foreach($users as $user)
+                                        @if($user->is_admin)
+                                            @continue
+                                        @endif
+                                        <tr>
+                                            <x-table.td>{{$user->name}}</x-table.td>
+                                            <x-table.td>{{$user->username}}</x-table.td>
+                                            <x-table.td>{{$user->email}}</x-table.td>
+                                            <x-table.td>{{$user->phone}}</x-table.td>
+                                            <x-table.td>{{$user->unit->name}}</x-table.td>
+                                            <x-table.actions>
+                                                <x-table.btn-update
+                                                    route="{{route('users.update',$user->getRouteKey())}}/edit"/>
+                                                <x-table.btn-delete
+                                                    route="{{route('users.destroy',$user->getRouteKey())}}"/>
+                                            </x-table.actions>
+                                        </tr>
+                                    @endforeach
 
-                            </x-slot>
-                        </x-table>
+                                </x-slot>
+                            </x-table>
 
+                        </div>
                     </div>
-                </div>
-            </div>
+                </div>       
+            @else
+                <x-partials.nofound message="No users found..."/>
+            @endif
         </section>
         <div class="grid grid-cols-2 gap-5 mt-5">
             <div class="p-4 mr-auto">
