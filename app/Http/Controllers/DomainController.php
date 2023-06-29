@@ -32,7 +32,7 @@ class DomainController extends Controller
     {
         // assign http status using function
         $http_status = $this->checkHttpStatus(request('url'));
-        
+
         $unit_id = Server::query()->where('id', request('server_id'))->value('unit_id');
         $higher_domain = Unit::query()->where('id', $unit_id)->value('higher_domain');
 
@@ -45,6 +45,7 @@ class DomainController extends Controller
             'port' => 'required|numeric|min:1',
             'server_id' => 'required',
             'user_id' => 'required',
+            'images' => 'nullable|image', // Include 'images' validation rule here
         ]);
 
         $domain = Domain::create([
@@ -60,12 +61,23 @@ class DomainController extends Controller
 
         $domainId = $domain->id;
 
-        $images_upload = request()->validate([
-            'images' => 'required|image',
-        ]);
+        // check if image is empty
+        if (request()->hasFile('images')) {
+            $images_upload['images'] = request('images')->store('domain_images');
+        } else {
+            $defaultImage = public_path('storage/domain_images/default-image.png');
+            $extension = pathinfo($defaultImage, PATHINFO_EXTENSION);
+            $filename = 'default-image.' . $extension;
+            $defaultImagePath = 'domain_images/' . $filename;
 
-        // upload image
-        $images_upload['images'] = request('images')->store('domain_images');
+            // Check if the default image already exists in the storage
+            if (!Storage::exists($defaultImagePath)) {
+                Storage::put($defaultImagePath, file_get_contents($defaultImage));
+            }
+
+            $images_upload['images'] = $defaultImagePath;
+        }
+
         DomainImages::create([
             'domain_id' => $domainId,
             'images' => $images_upload['images'],
