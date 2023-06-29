@@ -38,7 +38,7 @@ class DomainController extends Controller
 
         // validate request
         $attributes = request()->validate([
-            'url' => ['required', 'regex:/^.*' . preg_quote($higher_domain, '/') . '$/'],
+            'url' => ['required', 'regex:/^.*' . preg_quote($higher_domain, '/') . '\/?$/'],
             'name' => 'required',
             'description' => 'required',
             'application_type' => 'required',
@@ -126,7 +126,7 @@ class DomainController extends Controller
 
         // validate request
         $attributes = request()->validate([
-            'url' => ['required', 'regex:/^.*' . preg_quote($higher_domain, '/') . '$/'],
+            'url' => ['required', 'regex:/^.*' . preg_quote($higher_domain, '/') . '\/?$/'],
             'name' => 'required',
             'description' => 'required',
             'application_type' => 'required',
