@@ -36,19 +36,23 @@
                                             <x-table.td>{{ $notification->description }}</x-table.td>
                                             <x-table.td>
                                                 @if ($notification->is_done)
-                                                    <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Done</span>    
+                                                    <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 dark:bg-green-700 dark:text-green-100">Done</span>    
                                                 @else
-                                                    <span class="bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Not Done</span>
+                                                    <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 dark:bg-red-700 dark:text-red-100">Not Done</span>
                                                 @endif
                                             </x-table.td>
                                             <x-table.td>{{ $notification->created_at }}</x-table.td>
 
+                                            @can('admin')
                                             <x-table.actions>
+                                                @if($notification->is_done == '0')
                                                 <x-table.btn-update
                                                     route="{{ route('notifications.update', $notification->getRouteKey()) }}/edit" />
+                                                @endif
                                                 <x-table.btn-delete
                                                     route="{{ route('notifications.destroy', $notification->getRouteKey()) }}" />
                                             </x-table.actions>
+                                            @endcan
                                         </tr>
                                     @endforeach
                                 </x-slot>
