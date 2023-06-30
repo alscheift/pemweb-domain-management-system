@@ -33,7 +33,13 @@
                                             <x-table.td>{{$server->id}}</x-table.td>
                                             <x-table.td>{{$server->name}}</x-table.td>
                                             <x-table.td>{{$server->server_type}}</x-table.td>
-                                            <x-table.td>{{$server->status}}</x-table.td>
+                                            <x-table.td>
+                                                @if($server->status == 'Active')
+                                                    <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 dark:bg-green-700 dark:text-green-100">{{ $server->status }}</span>
+                                                @else
+                                                    <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 dark:bg-red-700 dark:text-red-100">{{ $server->status }}</span>
+                                                @endif
+                                            </x-table.td>
                                             <x-table.td>{{$server->ip_address}}</x-table.td>
                                             <x-table.td>{{$server->processor}}</x-table.td>
                                             <x-table.td>{{$server->core_processor_count}}</x-table.td>

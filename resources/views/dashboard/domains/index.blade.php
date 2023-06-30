@@ -33,7 +33,13 @@
                                             <x-table.td>{{$domain->url}}</x-table.td>
                                             <x-table.td>{{$domain->application_type}}</x-table.td>
                                             <x-table.td>{{$domain->port}}</x-table.td>
-                                            <x-table.td>{{$domain->http_status}}</x-table.td>
+                                            <x-table.td>
+                                                @if($domain->http_status == 'Active')
+                                                    <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 dark:bg-green-700 dark:text-green-100">{{ $domain->http_status }}</span>
+                                                @else
+                                                    <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 dark:bg-green-700 dark:text-green-100">{{ $domain->http_status }}</span>
+                                                @endif
+                                            </x-table.td>
                                             <x-table.td>{{$domain->server->name}}</x-table.td>
                                             <x-table.td>{{$domain->server->unit->name}}</x-table.td>
 
