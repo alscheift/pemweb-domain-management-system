@@ -56,7 +56,7 @@
                                                             @csrf
                                                             
                                                             <button
-                                                                class="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
+                                                                class="text-green-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-green-300 hover:text-indigo-500 focus:outline-none">
                                                                 Marks As Done
                                                             </button>
                                                         </form>
