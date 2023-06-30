@@ -16,15 +16,30 @@ use Illuminate\Support\Facades\Storage;
 
 class DomainController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
+        $search = $request->input('search');
+        $domains = Domain::query()
+        ->join('servers', 'domains.server_id', '=', 'servers.id')
+        ->select('domains.*', 'servers.name as server_name');
 
-        if(auth()->user()->is_admin == 1){
-            $domains = Domain::paginate(8);
+        if(auth()->user()->is_admin != 1){
+            $domains = $domains->where('domains.user_id', auth()->user()->id);
         }
-        else{
-            $domains = auth()->user()->unit->domains()->paginate(8);
+
+        if($search){
+            $domains = $domains->where('domains.id', 'like', "%$search%")
+                ->orWhere('domains.name', 'like', "%$search%")
+                ->orWhere('domains.description', 'like', "%$search%")
+                ->orWhere('domains.url', 'like', "%$search%")
+                ->orWhere('domains.application_type', 'like', "%$search%")
+                ->orWhere('domains.port', 'like', "%$search%")
+                ->orWhere('servers.name', 'like', "%$search%")
+                ->orWhere('domains.http_status', 'like', "%$search%");
         }
+
+        $domains = $domains->paginate(8);
+
         return view('dashboard.domains.index', compact('domains'));
     }
 
