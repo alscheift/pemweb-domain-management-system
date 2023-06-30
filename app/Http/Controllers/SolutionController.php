@@ -28,10 +28,14 @@ class SolutionController extends Controller
         }
 
         if ($search) {
-            $solutions = Solution::where('solutions.id', 'like', "%$search%")
-                ->orWhere('solutions.name', 'like', "%$search%")
+            $solutions = $solutions->where('solutions.id', 'like', "%$search%")
                 ->orWhere('solutions.description', 'like', "%$search%")
-                ->orWhere('solutions.higher_domain', 'like', "%$search%");
+                ->orWhere('domains.name', 'like', "%$search%")
+                ->orWhere('domains.url', 'like', "%$search%")
+                ->orWhere('notifications.status', 'like', "%$search%")
+                ->orWhere('solutions.status', 'like', "%$search%")
+                ->orWhere('solutions.target_date', 'like', "%$search%")
+                ->orWhere('solutions.date_of_solution', 'like', "%$search%");
         }
 
         $solutions = $solutions->paginate(8);
