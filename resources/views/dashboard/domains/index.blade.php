@@ -45,6 +45,14 @@
                                                         text="{{$domain->url}}"
                                                         route="{{route('domains.destroy',$domain->getRouteKey())}}"/>
                                                 @endcan
+                                                <div>
+                                                    <a href="{{route('domains.show',$domain->getRouteKey())}}">
+                                                        <button
+                                                            class="text-green-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
+                                                            View
+                                                        </button>
+                                                    </a>
+                                                </div>
                                             </x-table.actions>
                                         </tr>
                                     @endforeach

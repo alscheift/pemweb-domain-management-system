@@ -73,6 +73,7 @@ Route::middleware('auth')->group(function () {
 
     // Domains
     Route::get('/domains', [DomainController::class, 'index'])->name('domains');
+    Route::get('/domains/{domain}', [DomainController::class, 'show'])->name('domains.show');
     Route::get('/domains/create', [DomainController::class, 'create'])->middleware('can:pic')->name('domains.create');
     Route::post('/domains', [DomainController::class, 'store'])->middleware('can:pic')->name('domains.store');
     Route::get('/domains/{domain}/edit', [DomainController::class, 'edit'])->middleware('can:pic')->name('domains.edit');

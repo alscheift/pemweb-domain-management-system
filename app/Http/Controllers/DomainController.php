@@ -28,6 +28,13 @@ class DomainController extends Controller
         return view('dashboard.domains.index', compact('domains'));
     }
 
+    public function show(Domain $domain): View
+    {
+        $domainImages = DomainImages::where('domain_id', $domain->id)->first();
+
+        return view('dashboard.domains.show', compact('domain', 'domainImages'));
+    }
+
     public function store(): RedirectResponse
     {
         // assign http status using function
