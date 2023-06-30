@@ -13,6 +13,7 @@
                                         <x-table.th>ID</x-table.th>
                                         <x-table.th>Domain ID</x-table.th>
                                         <x-table.th>Domain Name</x-table.th>
+                                        <x-table.th>Server Name</x-table.th>
                                         <x-table.th>Status</x-table.th>
                                         <x-table.th>Description</x-table.th>
                                         <x-table.th>Progress</x-table.th>
@@ -30,14 +31,16 @@
                                             <x-table.td>{{ $notification->id }}</x-table.td>
                                             <x-table.td>{{ $notification->domain_id }}</x-table.td>
                                             <x-table.td>{{ $notification->domain_name }}</x-table.td>
+                                            <x-table.td>{{ $notification->server_name }}</x-table.td>
                                             <x-table.td>{{ $notification->status }}</x-table.td>
                                             <x-table.td>{{ $notification->description }}</x-table.td>
-                                            @if ($notications->is_done)
-                                                <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Green</span>    
-                                            @else
-                                                <span class="bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Red</span>
-                                            @endif
-
+                                            <x-table.td>
+                                                @if ($notification->is_done)
+                                                    <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Done</span>    
+                                                @else
+                                                    <span class="bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Not Done</span>
+                                                @endif
+                                            </x-table.td>
                                             <x-table.td>{{ $notification->created_at }}</x-table.td>
 
                                             <x-table.actions>

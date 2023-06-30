@@ -3,14 +3,14 @@
       <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
          <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Edit Notification</h2>
 
-         <form method="POST" action="{{route('notifications.update',$notification->id)}}">
+         <form method="POST" action="{{route('notifications.update',$notification)}}">
             @csrf
             @method('patch')
             <div class="grid grid-cols-1 gap-6 mt-4">
-               <x-forms.select name="domain_id" labelName="Domain ID">
+               <x-forms.select name="domain_id" labelName="Domain URL">
                   <option disabled>Choose Domain</option>
                   @foreach(\App\Models\Domain::all() as $domain)
-                     <option value="{{$domain->id}}" {{ old('domain_id') == $domain->id ? 'selected' : '' }}> {{ $domain->namev}} </option>
+                     <option value="{{$domain->id}}" {{ old('domain_id') == $domain->id ? 'selected' : '' }}> {{ $domain->url}} </option>
                   @endforeach
                </x-forms.select>
 
