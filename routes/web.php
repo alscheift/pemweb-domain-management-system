@@ -7,6 +7,7 @@ use App\Http\Controllers\ServerController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SolutionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,12 +37,6 @@ Route::post('login', [SessionsController::class, 'store']);
 Route::post('logout', [SessionsController::class, 'destroy']);
 
 Route::get('test', [SessionsController::class, 'test']);
-
-
-// Completions
-Route::get('/solutions', function () {
-    return view('dashboard.solutions.index');
-})->middleware('auth')->name('solutions');
 
 // Reports
 Route::get('/reports', [ReportController::class, 'index'])->middleware('auth')->name('reports');
@@ -84,7 +79,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
     Route::get('/notifications/create', [NotificationController::class, 'create'])->middleware('can:admin')->name('notifications.create');
     Route::post('/notifications', [NotificationController::class, 'store'])->middleware('can:admin')->name('notifications.store');
-    Route::get('/notifications/{unit}/edit', [NotificationController::class, 'edit'])->middleware('can:admin')->name('notifications.edit');
-    Route::patch('/notifications/{unit}', [NotificationController::class, 'update'])->middleware('can:admin')->name('notifications.update');
-    Route::delete('/notifications/{unit}', [NotificationController::class, 'destroy'])->middleware('can:admin')->name('notifications.destroy');
+    Route::get('/notifications/{notification}/edit', [NotificationController::class, 'edit'])->middleware('can:admin')->name('notifications.edit');
+    Route::patch('/notifications/{notification}', [NotificationController::class, 'update'])->middleware('can:admin')->name('notifications.update');
+    Route::delete('/notifications/{notification}', [NotificationController::class, 'destroy'])->middleware('can:admin')->name('notifications.destroy');
+
+    // Solutions
+    Route::get('/solutions', [SolutionController::class, 'index'])->name('solutions');
+    Route::get('/solutions/create', [SolutionController::class, 'create'])->middleware('can:pic')->name('solutions.create');
+    Route::post('/solutions', [SolutionController::class, 'store'])->middleware('can:pic')->name('solutions.store');
+    Route::get('/solutions/{solution}/edit', [SolutionController::class, 'edit'])->middleware('can:pic')->name('solutions.edit');
+    Route::patch('/solutions/{solution}', [SolutionController::class, 'update'])->middleware('can:pic')->name('solutions.update');
+    Route::post('/solutions/{solution}', [SolutionController::class, 'marksAsDone'])->middleware('can:pic')->name('solutions.done');
+    Route::delete('/solutions/{solution}', [SolutionController::class, 'destroy'])->middleware('can:pic')->name('solutions.destroy');
 });
