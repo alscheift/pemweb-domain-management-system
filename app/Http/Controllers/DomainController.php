@@ -23,8 +23,13 @@ class DomainController extends Controller
         ->join('servers', 'domains.server_id', '=', 'servers.id')
         ->select('domains.*', 'servers.name as server_name');
 
-        if(auth()->user()->is_admin != 1){
-            $domains = $domains->where('domains.user_id', auth()->user()->id);
+        // if(auth()->user()->is_admin != 1){
+        //     $unitId = Server::find($domains->server_id)->unit->id;
+        //     $domains = $domains->where($unitId, auth()->user()->unit_id);
+        // } 
+        
+        if (auth()->user()->is_admin != 1) {
+            $domains = $domains->where('servers.unit_id', auth()->user()->unit_id);
         }
 
         if($search){
@@ -87,9 +92,10 @@ class DomainController extends Controller
         if (request()->hasFile('images')) {
             $images_upload['images'] = request('images')->store('domain_images');
         } else {
-            $defaultImage = public_path('storage/domain_images/default-image.png');
+            $defaultImage = public_path('img/default-image.png');
             $extension = pathinfo($defaultImage, PATHINFO_EXTENSION);
-            $filename = 'default-image.' . $extension;
+            $randomString = \Illuminate\Support\Str::random(40);
+            $filename = $randomString . '.' . $extension;
             $defaultImagePath = 'domain_images/' . $filename;
 
             // Check if the default image already exists in the storage
