@@ -39,8 +39,8 @@ return new class extends Migration {
         });
 
         Schema::table('solutions', function (Blueprint $table) {
-            // Foreign Key ke Notifications('id_notifikasi')
-            $table->foreignId('notifikasi_id')
+            // Foreign Key ke Notifications('id_notifications')
+            $table->foreignId('notification_id')
                 ->constrained(table: 'notifications')
                 ->onDelete('cascade');
         });
@@ -75,7 +75,7 @@ return new class extends Migration {
         });
 
         Schema::table('solutions', function (Blueprint $table) {
-            $table->dropConstrainedForeignId('notifikasi_id');
+            $table->dropConstrainedForeignId('notification_id');
         });
 
         Schema::table('notifications', function (Blueprint $table) {

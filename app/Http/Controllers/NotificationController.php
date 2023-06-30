@@ -14,18 +14,24 @@ class NotificationController extends Controller
         $search = $request->input('search');
         $notifications = Notification::query()
             ->join('domains', 'notifications.domain_id', '=', 'domains.id')
-            ->select('notifications.*', 'domains.name AS domain_name');
+            ->join('servers', 'domains.server_id', '=', 'servers.id')
+            ->select('notifications.*', 'domains.name AS domain_name', 'servers.name AS server_name');
 
-        if ($search) {
-            $notifications = $notifications->where('id', 'like', "%$search%")
-                ->orWhere('domain_id', 'like', "%$search%")
-                ->orWhere('domain_name', 'like', "%$search%")
-                ->orWhere('status', 'like', "%$search%")
-                ->orWhere('description', 'like', "%$search%")
-                ->orWhere('created_at', 'like', "%$search%");
+        if (auth()->user()->is_admin != 1) {
+            $notifications = $notifications->where('servers.unit_id', auth()->user()->unit_id);
         }
 
-        $notifications = $notifications->paginate(7);
+        if ($search) {
+            $notifications = $notifications->where('notifications.id', 'like', "%$search%")
+                ->orWhere('notifications.domain_id', 'like', "%$search%")
+                ->orWhere('domains.name', 'like', "%$search%")
+                ->orWhere('servers.name', 'like', "%$search%")
+                ->orWhere('notifications.status', 'like', "%$search%")
+                ->orWhere('notifications.description', 'like', "%$search%")
+                ->orWhere('notifications.created_at', 'like', "%$search%");
+        }
+
+        $notifications = $notifications->paginate(8);
 
         return view('dashboard.notifications.index', compact('notifications'));
     }
@@ -64,5 +70,12 @@ class NotificationController extends Controller
         $notification->update($attributes);
 
         return redirect(route('notifications'))->with('success', 'Notification updated successfully');
+    }
+
+    public function destroy(Notification $notification): RedirectResponse
+    {
+        $notification->delete();
+
+        return redirect(route('notifications'))->with('success', 'Notification deleted successfully');
     }
 }
