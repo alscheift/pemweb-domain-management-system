@@ -38,9 +38,6 @@ Route::post('logout', [SessionsController::class, 'destroy']);
 
 Route::get('test', [SessionsController::class, 'test']);
 
-// Reports
-Route::get('/reports', [ReportController::class, 'index'])->middleware('auth')->name('reports');
-
 Route::middleware('auth')->group(function () {
     // Users
     Route::get('/users', [UserController::class, 'index'])->middleware('can:admin')->name('users');
@@ -91,4 +88,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/solutions/{solution}', [SolutionController::class, 'update'])->middleware('can:pic')->name('solutions.update');
     Route::post('/solutions/{solution}', [SolutionController::class, 'marksAsDone'])->middleware('can:pic')->name('solutions.done');
     Route::delete('/solutions/{solution}', [SolutionController::class, 'destroy'])->middleware('can:pic')->name('solutions.destroy');
+
+    // Reports
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports');
 });
