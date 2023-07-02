@@ -72,6 +72,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/domains/{domain}', [DomainController::class, 'destroy'])->middleware('can:pic')->name('domains.destroy');
     Route::get('/domains/{domain}', [DomainController::class, 'show'])->name('domains.show');
 
+    // Route::get('/domains/export-excel', [DomainController::class, 'viewExcel'])->name('domains.export');
+
+    Route::post('/domains/export-excel', [DomainController::class, 'exportExcel'])->name('domains.export-excel');
+
     // Notifications
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
     Route::get('/notifications/create', [NotificationController::class, 'create'])->middleware('can:admin')->name('notifications.create');
