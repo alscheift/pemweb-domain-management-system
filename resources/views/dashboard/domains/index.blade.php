@@ -90,8 +90,8 @@
                 @endif
             </div>
             
+            @can('pic')
             <div class="p-4 ml-auto grid grid-cols-2 gap-4">
-                @can('pic')
                 <div class="col-auto">
                     <a href="{{route('domains.create')}}">
                         <button
@@ -100,8 +100,6 @@
                         </button>
                     </a>
                 </div>
-                @endcan
-
                 <div class="col-auto">
                     <form action="{{ route('domains.export-excel') }}" method="POST" target="__blank">
                         @csrf
@@ -112,7 +110,21 @@
                     </form>
                 </div>
             </div>
-            
+            @endcan
+
+            @can('admin')
+                <div class="p-4 ml-auto grid gap-4">
+                    <div class="col-auto">
+                        <form action="{{ route('domains.export-excel') }}" method="POST" target="__blank">
+                            @csrf
+                            <button type="submit"
+                                class="px-2 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
+                                Export to Excel
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            @endcan
         </div>
     </div>
 </x-layouts.dashboard>
