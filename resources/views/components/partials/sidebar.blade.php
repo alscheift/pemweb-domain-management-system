@@ -12,7 +12,7 @@
     }
 @endphp
 
-<div class="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
+<div id="default-sidebar" class="sm:fixed md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0">
     <!-- Sidebar component, swap this element with another sidebar if you like -->
     <div class="flex min-h-0 flex-1 flex-col bg-gray-800">
         <div class="flex h-16 flex-shrink-0 items-center bg-gray-900 px-4">
@@ -43,7 +43,7 @@
                         </div>
                         Users
                     </a>
-                    
+
                     <a href="{{route('units')}}" class="{{isActive('units')}}">
                         <div class="text-gray-400 group-hover:text-gray-300 mr-3 flex-shrink-0 h-6 w-6">
                             <x-svg name="units"/>
@@ -51,7 +51,7 @@
                         Units
                     </a>
                 @endcan
-                
+
                 <a href="{{route('servers')}}" class="{{isActive('servers')}}">
                     <div class="text-gray-400 group-hover:text-gray-300 mr-3 flex-shrink-0 h-6 w-6">
                         <x-svg name="servers"/>
@@ -73,7 +73,7 @@
                     </div>
                     Notifications
                 </a>
-                
+
                 <a href="{{route('solutions')}}" class="{{isActive('solutions')}}">
                     <div class="text-gray-400 group-hover:text-gray-300 mr-3 flex-shrink-0 h-6 w-6">
                         <x-svg name="solutions"/>
