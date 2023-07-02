@@ -16,7 +16,7 @@
                 <div class="mt-4">
                     <div class="flex items-center justify-between">
                         <label for="password" class="block text-sm text-gray-800 dark:text-gray-200">Password</label>
-                        <a href="#" class="text-xs text-gray-600 dark:text-gray-400 hover:underline">Forget
+                        <a href="#" class="invisible text-xs text-gray-600 dark:text-gray-400 hover:underline">Forget
                             Password?</a>
                     </div>
 
@@ -35,8 +35,8 @@
                 </div>
             </form>
 
-            <p class="mt-8 text-xs font-light text-center text-gray-400"> Don't have an account? <a href="#"
-                                                                                                    class="font-medium text-gray-700 dark:text-gray-200 hover:underline">Create
+            <p class="invisible mt-8 text-xs font-light text-center text-gray-400"> Don't have an account? <a href="#"
+                                                                                                              class="font-medium text-gray-700 dark:text-gray-200 hover:underline">Create
                     One</a></p>
             @error('username')
             <span class="text-xs text-red-500">{{ $message }}{{old('username')}}</span>
