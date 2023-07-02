@@ -1,6 +1,6 @@
 <x-layouts.dashboard>
     <x-partials.form/>
-    
+
     <div class="py-4 flex flex-col">
         <section class="container mx-auto">
             @if ($users->count())
@@ -22,15 +22,12 @@
                                 </x-slot>
                                 <x-slot name="tbody">
                                     @foreach($users as $user)
-                                        @if($user->is_admin)
-                                            @continue
-                                        @endif
                                         <tr>
                                             <x-table.td>{{$user->name}}</x-table.td>
                                             <x-table.td>{{$user->username}}</x-table.td>
                                             <x-table.td>{{$user->email}}</x-table.td>
                                             <x-table.td>{{$user->phone}}</x-table.td>
-                                            <x-table.td>{{$user->unit->name}}</x-table.td>
+                                            <x-table.td>{{$user->unit->name??'Admin👨🏻‍💻'}}</x-table.td>
                                             <x-table.actions>
                                                 <x-table.btn-update
                                                     route="{{route('users.update',$user->getRouteKey())}}/edit"/>
@@ -45,7 +42,7 @@
 
                         </div>
                     </div>
-                </div>       
+                </div>
             @else
                 <x-partials.nofound message="No users found..."/>
             @endif

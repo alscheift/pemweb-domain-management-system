@@ -7,8 +7,13 @@
                 @csrf
 
                 <div class="grid grid-cols-1 gap-6 mt-4">
+                    <x-forms.select name="is_admin" labelName="Role">
+                        <option value="1">Admin</option>
+                        <option value="0" selected>User</option>
+                    </x-forms.select>
+
                     <x-forms.select name="unit_id" labelName="Unit">
-                        <option selected>Choose Unit</option>
+                        <option value="null" selected>Choose Unit</option>
                         @foreach(\App\Models\Unit::all() as $unit)
                             <option value="{{$unit->id}}">{{$unit->name}}</option>
                         @endforeach
@@ -33,4 +38,25 @@
             </form>
         </section>
     </div>
+    <script>
+        // Get references to the select elements
+        const is_adminSelect = document.getElementById('is_admin');
+        const unit_idSelect = document.getElementById('unit_id');
+        const unit_container = unit_idSelect.parentElement;
+
+        // Function to hide/show the unit_id select based on the is_admin select value
+        function toggleUnitIdSelect() {
+            if (is_adminSelect.value === '1') {
+                unit_container.style.display = 'none';  // Hide the unit_id select
+            } else {
+                unit_container.style.display = 'block'; // Show the unit_id select
+            }
+        }
+
+        // Add event listener to the is_admin select element
+        is_adminSelect.addEventListener('change', toggleUnitIdSelect);
+
+        // Initially call the function to set the initial visibility state
+        toggleUnitIdSelect();
+    </script>
 </x-layouts.dashboard>

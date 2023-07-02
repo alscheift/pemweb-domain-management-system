@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -15,7 +16,7 @@ class UserController extends Controller
     public function index(Request $request): View
     {
         $search = $request->input('search');
-        $users = User::query()->where('is_admin', false);
+        $users = User::query();
 
         if ($search) {
             $users = User::where('id', 'like', "%$search%")
@@ -39,8 +40,23 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'phone' => ['required', 'regex:/^(\+62)\d{10,12}$/'],
-            'unit_id' => ''
+            'unit_id' => 'required',
+            'is_admin' => 'required'
         ]);
+        
+        if ($attributes['is_admin'] == '1') {
+            $attributes['unit_id'] = null;
+        }
+
+        if ($attributes['unit_id'] == 'null') {
+            $attributes['unit_id'] = null;
+            if ($attributes['is_admin'] == '0') {
+                // throw validation exception
+                throw ValidationException::withMessages([
+                    'unit_id' => 'The unit field is required for user.',
+                ]);
+            }
+        }
 
         User::create($attributes);
 
@@ -101,7 +117,7 @@ class UserController extends Controller
         ]);
 
         $attributes['password'] = Hash::make($attributes['password']);
-        
+
         $user->update($attributes);
 
         return redirect(route('profile'))->with('success', 'Profile updated successfully');
