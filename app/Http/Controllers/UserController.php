@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -76,5 +77,33 @@ class UserController extends Controller
         $user->delete();
 
         return redirect(route('users'))->with('success', 'User deleted successfully');
+    }
+
+    public function profile(User $user): View
+    {
+        $user = auth()->user();
+        return view('profile.index', compact('user'));
+    }
+
+    public function profileEdit(User $user): View
+    {
+        return view('profile.edit', compact('user'));
+    }
+
+    public function profileUpdate(User $user): RedirectResponse
+    {
+        $attributes = request()->validate([
+            'name' => 'required',
+            'username' => 'required',
+            'email' => 'required|email',
+            'phone' => ['required', 'regex:/^(\+62)\d{10,12}$/'],
+            'password' => 'required',
+        ]);
+
+        $attributes['password'] = Hash::make($attributes['password']);
+        
+        $user->update($attributes);
+
+        return redirect(route('profile'))->with('success', 'Profile updated successfully');
     }
 }
