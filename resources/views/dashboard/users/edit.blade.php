@@ -9,13 +9,15 @@
 
                 <div class="grid grid-cols-1 gap-6 mt-4">
 
-                    <x-forms.select name="unit_id" labelName="Unit">
-                        <option selected>Choose Unit</option>
-                        @foreach(\App\Models\Unit::all() as $unit)
-                            <option
-                                value="{{$unit->id}}" {{$user->unit->id==$unit->id? 'selected':''}}>{{$unit->name}}</option>
-                        @endforeach
-                    </x-forms.select>
+                    @if(!$user->is_admin)
+                        <x-forms.select name="unit_id" labelName="Unit">
+                            <option selected>Choose Unit</option>
+                            @foreach(\App\Models\Unit::all() as $unit)
+                                <option
+                                    value="{{$unit->id}}" {{$user->unit?->id==$unit->id? 'selected':''}}>{{$unit->name}}</option>
+                            @endforeach
+                        </x-forms.select>
+                    @endif
 
                     <x-forms.input name="name" value="{{old('name',$user->name)}}"/>
                     <x-forms.input name="username" value="{{old('name',$user->username)}}"/>
