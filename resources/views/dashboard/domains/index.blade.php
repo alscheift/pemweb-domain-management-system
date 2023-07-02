@@ -72,10 +72,10 @@
             @endif
         </section>
         <div class="grid grid-cols-2 gap-5 mt-5">
-            <div class="p-4 mr-auto">
+            <div class="p-4 mr-auto grid grid-cols-2 gap-4">
                 @if ($domains->currentPage() > 1)
                     <a href="{{ $domains->previousPageUrl() }}">
-                        <button class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600">
+                        <button class="col-auto px-2 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600">
                             Previous
                         </button>
                     </a>
@@ -83,22 +83,36 @@
 
                 @if ($domains->hasMorePages())
                     <a href="{{ $domains->nextPageUrl() }}">
-                        <button class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600">
+                        <button class="col-auto px-2 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600">
                             Next
                         </button>
                     </a>
                 @endif
             </div>
-            @can('pic')
-            <div class="p-4 ml-auto">
-                <a href="{{route('domains.create')}}">
-                    <button
-                        class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
-                        Add Domain
-                    </button>
-                </a>
+            
+            <div class="p-4 ml-auto grid grid-cols-2 gap-4">
+                @can('pic')
+                <div class="col-auto">
+                    <a href="{{route('domains.create')}}">
+                        <button
+                            class="px-2 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
+                            Add Domain
+                        </button>
+                    </a>
+                </div>
+                @endcan
+
+                <div class="col-auto">
+                    <form action="{{ route('domains.export-excel') }}" method="POST" target="__blank">
+                        @csrf
+                        <button type="submit"
+                            class="px-2 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
+                            Export to Excel
+                        </button>
+                    </form>
+                </div>
             </div>
-            @endcan
+            
         </div>
     </div>
 </x-layouts.dashboard>

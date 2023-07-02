@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
 
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use App\Exports\DomainsDataExport;
+
+
 class DomainController extends Controller
 {
     public function index(Request $request): View
@@ -215,5 +220,10 @@ class DomainController extends Controller
         $domain->delete();
 
         return redirect(route('domains'))->with('success', 'Domain deleted successfully');
+    }
+
+    public function exportExcel(): BinaryFileResponse
+    {
+        return Excel::download(new DomainsDataExport, 'domains.xlsx');
     }
 }
