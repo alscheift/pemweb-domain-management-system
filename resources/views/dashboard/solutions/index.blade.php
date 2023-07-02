@@ -52,14 +52,17 @@
                                             <x-table.actions>
                                                 @can('pic')
                                                     @if ($solution->notification_is_done == '0')
-                                                        <form method="POST" action="{{ route('solutions.done', $solution) }}">
+                                                        {{-- <form method="POST" action="{{ route('solutions.done', $solution) }}">
                                                             @csrf
                                                             
                                                             <button
                                                                 class="text-green-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-green-300 hover:text-indigo-500 focus:outline-none">
                                                                 Marks As Done
                                                             </button>
-                                                        </form>
+                                                        </form> --}}
+
+                                                        <x-table.btn-done
+                                                            route="{{ route('solutions.done', $solution) }}" />
 
                                                         <x-table.btn-update
                                                             route="{{ route('solutions.update', $solution->getRouteKey()) }}/edit" />

@@ -95,4 +95,10 @@ Route::middleware('auth')->group(function () {
 
     // Reports
     Route::get('/reports', [ReportController::class, 'index'])->name('reports');
+
+    // Profile
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+    
+    Route::get('/profile/{user}/edit', [UserController::class, 'profileEdit'])->name('profile.edit');
+    Route::patch('/profile/{user}', [UserController::class, 'profileUpdate'])->name('profile.update');
 });
