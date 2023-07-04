@@ -34,4 +34,14 @@ class Domain extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public static function activeDomains()
+    {
+        return Domain::where('http_status', 'Active')->get();
+    }
+
+    public static function inactiveDomains()
+    {
+        return Domain::where('http_status', 'No Active')->get();
+    }
 }
