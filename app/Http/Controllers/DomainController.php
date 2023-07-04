@@ -26,19 +26,19 @@ class DomainController extends Controller
     {
         $search = $request->input('search');
         $domains = Domain::query()
-        ->join('servers', 'domains.server_id', '=', 'servers.id')
-        ->select('domains.*', 'servers.name as server_name');
+            ->join('servers', 'domains.server_id', '=', 'servers.id')
+            ->select('domains.*', 'servers.name as server_name');
 
         // if(auth()->user()->is_admin != 1){
         //     $unitId = Server::find($domains->server_id)->unit->id;
         //     $domains = $domains->where($unitId, auth()->user()->unit_id);
-        // } 
-        
+        // }
+
         if (auth()->user()->is_admin != 1) {
             $domains = $domains->where('servers.unit_id', auth()->user()->unit_id);
         }
 
-        if($search){
+        if ($search) {
             $domains = $domains->where('domains.id', 'like', "%$search%")
                 ->orWhere('domains.name', 'like', "%$search%")
                 ->orWhere('domains.description', 'like', "%$search%")
@@ -141,13 +141,13 @@ class DomainController extends Controller
         return view('dashboard.domains.create');
     }
 
-    public function edit(Domain $domain): RedirectResponse
+    public function edit(Domain $domain): RedirectResponse|View
     {
-        if (! Gate::allows('auth-domains', $domain)) {
-            return redirect (route('domains'))->with('error', 'You dont have authorization to edit this!');
+        if (!Gate::allows('auth-domains', $domain)) {
+            return redirect(route('domains'))->with('error', 'You dont have authorization to edit this!');
         }
 
-        return redirect()->route('dashboard.domains.edit', compact('domain'));
+        return view('dashboard.domains.edit', compact('domain'));
     }
 
     public function update(Domain $domain): RedirectResponse
@@ -211,11 +211,11 @@ class DomainController extends Controller
 
     public function destroy(Domain $domain): RedirectResponse
     {
-        if (! Gate::allows('auth-domains', $domain)) {
-            return redirect (route('domains'))->with('error', 'You dont have authorization to delete this!');
+        if (!Gate::allows('auth-domains', $domain)) {
+            return redirect(route('domains'))->with('error', 'You dont have authorization to delete this!');
         }
 
-        if($domain->notifications()->exists()) {
+        if ($domain->notifications()->exists()) {
             return redirect(route('domains'))->with('error', 'Domain cannot be deleted because it has notifications');
         }
         // get old image
