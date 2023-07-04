@@ -37,7 +37,7 @@
                                                 @if($domain->http_status == 'Active')
                                                     <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 dark:bg-green-700 dark:text-green-100">{{ $domain->http_status }}</span>
                                                 @else
-                                                    <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 dark:bg-green-700 dark:text-green-100">{{ $domain->http_status }}</span>
+                                                    <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 dark:bg-red-700 dark:text-red-100">{{ $domain->http_status }}</span>
                                                 @endif
                                             </x-table.td>
                                             <x-table.td>{{$domain->server->name}}</x-table.td>
@@ -89,27 +89,27 @@
                     </a>
                 @endif
             </div>
-            
+
             @can('pic')
-            <div class="p-4 ml-auto grid grid-cols-2 gap-4">
-                <div class="col-auto">
-                    <a href="{{route('domains.create')}}">
-                        <button
-                            class="px-2 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
-                            Add Domain
-                        </button>
-                    </a>
+                <div class="p-4 ml-auto grid grid-cols-2 gap-4">
+                    <div class="col-auto">
+                        <a href="{{route('domains.create')}}">
+                            <button
+                                class="px-2 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
+                                Add Domain
+                            </button>
+                        </a>
+                    </div>
+                    <div class="col-auto">
+                        <form action="{{ route('domains.export-excel') }}" method="POST" target="__blank">
+                            @csrf
+                            <button type="submit"
+                                    class="px-2 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
+                                Export to Excel
+                            </button>
+                        </form>
+                    </div>
                 </div>
-                <div class="col-auto">
-                    <form action="{{ route('domains.export-excel') }}" method="POST" target="__blank">
-                        @csrf
-                        <button type="submit"
-                            class="px-2 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
-                            Export to Excel
-                        </button>
-                    </form>
-                </div>
-            </div>
             @endcan
 
             @can('admin')
@@ -118,7 +118,7 @@
                         <form action="{{ route('domains.export-excel') }}" method="POST" target="__blank">
                             @csrf
                             <button type="submit"
-                                class="px-2 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
+                                    class="px-2 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
                                 Export to Excel
                             </button>
                         </form>
