@@ -30,12 +30,12 @@
                         <x-forms.input name="core_processor_count" labelName="Core Processor Count" type="number"/>
                         <x-forms.input name="ram" labelName="RAM" type="number"/>
 
-                        <x-forms.select name="unit_id" labelName="Unit">
+                        {{-- <x-forms.select name="unit_id" labelName="Unit">
                             <option selected>Choose Unit</option>
                             @foreach(\App\Models\Unit::all() as $unit)
                                 <option value="{{$unit->id}}">{{$unit->name}}</option>
                             @endforeach
-                        </x-forms.select>
+                        </x-forms.select> --}}
 
                     </div>
 
