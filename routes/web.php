@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DomainController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ReportController;
@@ -25,10 +26,7 @@ Route::get('/laravel', function () {
     return view('welcome.blade.php');
 });
 
-Route::get('/', function () {
-    return view('dashboard.index');
-
-})->middleware('auth')->name('dashboard');
+Route::get('/', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 
 
 // Login
@@ -46,7 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/users/{user}/edit', [UserController::class, 'edit'])->middleware('can:admin')->name('users.edit');
     Route::patch('/users/{user}', [UserController::class, 'update'])->middleware('can:admin')->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->middleware('can:admin')->name('users.destroy');
-    
+
     // Units
     Route::get('/units', [UnitController::class, 'index'])->middleware('can:admin')->name('units');
     Route::get('/units/create', [UnitController::class, 'create'])->middleware('can:admin')->name('units.create');
@@ -98,7 +96,7 @@ Route::middleware('auth')->group(function () {
 
     // Profile
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
-    
+
     Route::get('/profile/{user}/edit', [UserController::class, 'profileEdit'])->name('profile.edit');
     Route::patch('/profile/{user}', [UserController::class, 'profileUpdate'])->name('profile.update');
 });
