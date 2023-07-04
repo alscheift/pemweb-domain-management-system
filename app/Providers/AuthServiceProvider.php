@@ -30,6 +30,10 @@ class AuthServiceProvider extends ServiceProvider
             return $user->is_admin === 0 ?? false;
         });
 
+        Gate::define('auth-servers', function ($user, $server) {
+            return $user->unit->id === $server->unit->id;
+        });
+
         Gate::define('auth-domains', function ($user, $domain) {
             return $user->unit->id === $domain->server->unit->id;
         });
