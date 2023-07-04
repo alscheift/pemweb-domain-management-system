@@ -46,8 +46,9 @@ class ServerController extends Controller
             'processor' => 'required',
             'core_processor_count' => 'required | numeric | min:1',
             'ram' => 'required | numeric | min:1',
-            'unit_id' => 'required',
         ]);
+
+        $attributes['unit_id'] = auth()->user()->unit_id;
 
         Server::create($attributes);
 
@@ -78,7 +79,6 @@ class ServerController extends Controller
             'processor' => 'required',
             'core_processor_count' => 'required | numeric | min:1',
             'ram' => 'required | numeric | min:1',
-            'unit_id' => 'required',
         ]);
 
         $server->update($attributes);
