@@ -58,6 +58,8 @@ class UserController extends Controller
             }
         }
 
+        $attributes['password'] = Hash::make($attributes['password']);
+
         User::create($attributes);
 
         return redirect(route('users'))->with('success', 'User added successfully');
