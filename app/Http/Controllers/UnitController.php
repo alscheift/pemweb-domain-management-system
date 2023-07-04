@@ -64,6 +64,10 @@ class UnitController extends Controller
 
     public function destroy(Unit $unit): RedirectResponse
     {
+        if($unit->servers()->exists() or $unit->users()->exists()){
+            return redirect(route('units'))->with('error', 'Unit cannot be deleted because it has servers or users');
+        }
+        
         $unit->delete();
 
         return redirect(route('units'))->with('success', 'Unit deleted successfully');

@@ -90,8 +90,11 @@ class UserController extends Controller
 
     public function destroy(User $user): RedirectResponse
     {
-        $user->delete();
+        if($user->domains()->exists()){
+            return redirect(route('users'))->with('error', 'User cannot be deleted because it has domains');
+        }
 
+        $user->delete();
         return redirect(route('users'))->with('success', 'User deleted successfully');
     }
 
