@@ -89,7 +89,7 @@ class SolutionController extends Controller
         return $currentDate;
     }
 
-    public function edit(Solution $solution): RedirectResponse
+    public function edit(Solution $solution): RedirectResponse | View
     {
         if (! Gate::allows('auth-solutions', $solution)) {
             return redirect (route('solutions'))->with('error', 'You dont have authorization to edit this!');
@@ -99,7 +99,7 @@ class SolutionController extends Controller
             $query->where('unit_id', auth()->user()->unit_id);
         })->where('is_done', '0')->get();
 
-        return redirect()->route('dashboard.solutions.edit', compact('solution', 'notifications'));
+        return view('dashboard.solutions.edit', compact('notifications', 'solution'));
     }
 
     public function update(Solution $solution){

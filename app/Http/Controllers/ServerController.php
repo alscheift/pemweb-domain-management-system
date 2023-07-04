@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Server;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
 class ServerController extends Controller
@@ -58,8 +59,12 @@ class ServerController extends Controller
         return view('dashboard.servers.create');
     }
 
-    public function edit(Server $server): View
+    public function edit(Server $server): View | RedirectResponse
     {
+        if (!Gate::allows('auth-servers', $server)) {
+            return redirect(route('servers'))->with('error', 'You dont have authorization to edit this!');
+        }
+
         return view('dashboard.servers.edit', compact('server'));
     }
 
@@ -83,6 +88,10 @@ class ServerController extends Controller
 
     public function destroy(Server $server): RedirectResponse
     {
+        if (!Gate::allows('auth-servers', $server)) {
+            return redirect(route('servers'))->with('error', 'You dont have authorization to delete this!');
+        }
+
         if($server->domains()->exists()){
             return redirect(route('servers'))->with('error', 'Server cannot be deleted because it has domains');
         }
