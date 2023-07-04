@@ -29,4 +29,9 @@ class Domain extends Model
     {
         return $this->hasMany(Notification::class);
     }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

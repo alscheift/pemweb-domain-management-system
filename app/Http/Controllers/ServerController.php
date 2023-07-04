@@ -83,6 +83,10 @@ class ServerController extends Controller
 
     public function destroy(Server $server): RedirectResponse
     {
+        if($server->domains()->exists()){
+            return redirect(route('servers'))->with('error', 'Server cannot be deleted because it has domains');
+        }
+        
         $server->delete();
 
         return redirect(route('servers'))->with('success', 'Server deleted successfully');

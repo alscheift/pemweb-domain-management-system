@@ -49,4 +49,9 @@ class User extends Authenticatable
         return $this->belongsTo(Unit::class);
     }
 
+    public function domains(): HasMany
+    {
+        return $this->hasMany(Domain::class);
+    }
+
 }
