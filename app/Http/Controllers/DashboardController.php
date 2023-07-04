@@ -24,7 +24,19 @@ class DashboardController extends Controller
 
             return view('dashboard.index', compact('servers', 'domains', 'units', 'pics', 'notifications'));
         } else {
-            return view('dashboard.index');
+            $servers = Server::where('unit_id', auth()->user()->id)->get();
+            $domains = Domain::with('server')
+                ->whereHas('server', function ($query) {
+                    $query->where('unit_id', auth()->user()->unit->id);
+                });
+            $notifications = Notification::with('domain')
+                ->whereHas('domain', function ($query) {
+                    $query->whereHas('server', function ($query) {
+                        $query->where('unit_id', auth()->user()->unit->id);
+                    });
+                })->where('is_done', false)->get();
+
+            return view('dashboard.index', compact('servers', 'domains', 'notifications'));
         }
     }
 }
