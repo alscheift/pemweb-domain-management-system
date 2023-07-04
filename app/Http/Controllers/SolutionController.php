@@ -7,6 +7,7 @@ use App\Models\Notification;
 use App\Models\Solution;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
 
@@ -88,13 +89,17 @@ class SolutionController extends Controller
         return $currentDate;
     }
 
-    public function edit(Solution $solution): View
+    public function edit(Solution $solution): RedirectResponse
     {
+        if (! Gate::allows('auth-solutions', $solution)) {
+            return redirect (route('solutions'))->with('error', 'You dont have authorization to edit this!');
+        }
+        
         $notifications = Notification::whereHas('domain.server', function ($query) {
             $query->where('unit_id', auth()->user()->unit_id);
         })->where('is_done', '0')->get();
 
-        return view('dashboard.solutions.edit', compact('solution', 'notifications'));
+        return redirect()->route('dashboard.solutions.edit', compact('solution', 'notifications'));
     }
 
     public function update(Solution $solution){
@@ -129,6 +134,10 @@ class SolutionController extends Controller
 
     public function destroy(Solution $solution): RedirectResponse
     {
+        if (! Gate::allows('auth-solutions', $solution)) {
+            return redirect (route('solutions'))->with('error', 'You dont have authorization to delete this!');
+        }
+
         $solution->delete();
 
         return redirect(route('solutions'))->with('success', 'Solution deleted successfully.');
@@ -136,6 +145,10 @@ class SolutionController extends Controller
 
     public function marksAsDone(Solution $solution): RedirectResponse
     {
+        if (! Gate::allows('auth-solutions', $solution)) {
+            return redirect (route('solutions'))->with('error', 'You dont have authorization to marks as done this!');
+        }
+
         $solution->update([
             'status' => 'Done',
             'date_of_solution' => $this->getCurrentDate(),

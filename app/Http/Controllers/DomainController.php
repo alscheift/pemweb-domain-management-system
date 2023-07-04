@@ -10,6 +10,7 @@ use App\Models\User;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
@@ -140,9 +141,13 @@ class DomainController extends Controller
         return view('dashboard.domains.create');
     }
 
-    public function edit(Domain $domain): View
+    public function edit(Domain $domain): RedirectResponse
     {
-        return view('dashboard.domains.edit', compact('domain'));
+        if (! Gate::allows('auth-domains', $domain)) {
+            return redirect (route('domains'))->with('error', 'You dont have authorization to edit this!');
+        }
+
+        return redirect()->route('dashboard.domains.edit', compact('domain'));
     }
 
     public function update(Domain $domain): RedirectResponse
@@ -206,6 +211,10 @@ class DomainController extends Controller
 
     public function destroy(Domain $domain): RedirectResponse
     {
+        if (! Gate::allows('auth-domains', $domain)) {
+            return redirect (route('domains'))->with('error', 'You dont have authorization to delete this!');
+        }
+
         if($domain->notifications()->exists()) {
             return redirect(route('domains'))->with('error', 'Domain cannot be deleted because it has notifications');
         }
