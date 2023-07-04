@@ -26,7 +26,7 @@ class SessionsController extends Controller
 
         if (!auth()->attempt($attributes)) {
             throw ValidationException::withMessages([
-                'username' => 'Username atau password salah. Silahkan coba lagi.'
+                'username' => 'Username or password wrong. Please try again.'
             ]);
         }
 
