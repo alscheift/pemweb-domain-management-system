@@ -74,6 +74,10 @@ class NotificationController extends Controller
 
     public function destroy(Notification $notification): RedirectResponse
     {
+        if($notification->solutions()->exists()) {
+            return redirect(route('notifications'))->with('error', 'Notification cannot be deleted because it has solutions');
+        }
+
         $notification->delete();
 
         return redirect(route('notifications'))->with('success', 'Notification deleted successfully');

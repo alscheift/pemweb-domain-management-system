@@ -206,6 +206,9 @@ class DomainController extends Controller
 
     public function destroy(Domain $domain): RedirectResponse
     {
+        if($domain->notifications()->exists()) {
+            return redirect(route('domains'))->with('error', 'Domain cannot be deleted because it has notifications');
+        }
         // get old image
         $oldImage = DomainImages::where('domain_id', $domain->id)->first();
 
