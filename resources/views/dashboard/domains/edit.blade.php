@@ -8,10 +8,6 @@
                 @method('patch')
 
                 <div class="grid grid-cols-1 gap-6 mt-4">
-                    <div class="hidden">
-                        <input id="user_id" name="user_id" value="{{auth()->user()->id}}"/>
-                    </div>
-
                     <x-forms.input name="name" value="{{old('name',$domain->name)}}"/>
                     <x-forms.input name="url" value="{{old('url',$domain->url)}}" labelName="URL"/>
                     <x-forms.input name="description" value="{{old('description',$domain->description)}}"/>
