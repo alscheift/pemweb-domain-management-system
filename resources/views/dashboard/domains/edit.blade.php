@@ -17,8 +17,11 @@
                     <x-forms.select name="server_id" labelName="Server">
                         <option disabled>Choose Server (Unit)</option>
                         @foreach(\App\Models\Server::all() as $server)
+                            @if($server->unit_id != auth()->user()->unit_id)
+                                @continue
+                            @endif
                             @if($server->status == 'Active')
-                                <option value="{{$server->id}}" {{ old('server_id') == $server->id ? 'selected' : '' }}> 
+                                <option value="{{$server->id}}" @selected(old('server_id', $domain->server_id) == $server->id ) > 
                                     {{$server->name.' ('.$server->unit->name.')'}} 
                                 </option>
                             @endif

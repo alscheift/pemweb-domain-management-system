@@ -14,7 +14,7 @@
                             <option selected>Choose Unit</option>
                             @foreach(\App\Models\Unit::all() as $unit)
                                 <option
-                                    value="{{$unit->id}}" {{$user->unit?->id==$unit->id? 'selected':''}}>{{$unit->name}}</option>
+                                    value="{{$unit->id}}" @selected(old('unit_id', $user->unit_id) == $unit->id)> {{$unit->name}} </option>
                             @endforeach
                         </x-forms.select>
                     @endif

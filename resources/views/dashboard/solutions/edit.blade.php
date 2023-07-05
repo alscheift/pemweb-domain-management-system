@@ -11,15 +11,15 @@
                     <x-forms.select name="notification_id" labelName="Domain Name">
                         <option disabled>Choose Notification</option>
                         @foreach($notifications as $notification)
-                            <option value="{{ $notification->id }}" {{ old('notification_id') == $notification->id ? 'selected' : '' }}>{{$notification->domain->name}}</option>
+                            <option value="{{ $notification->id }}" @selected(old('norification_id', $solution->notification_id) === $notification->id) >{{$notification->domain->name}}</option>
                         @endforeach
                     </x-forms.select>
 
                     <x-forms.select name="status" labelName="Status">
                         <option disabled>Choose Status</option>
-                        <option value="To Do" {{ strtolower(old('status')) === 'to do' ? 'selected' : '' }}>To Do</option>
-                        <option value="Doing" {{ strtolower(old('status')) === 'doing' ? 'selected' : '' }}>Doing</option>
-                        <option value="Done" {{ strtolower(old('status')) === 'done' ? 'selected' : '' }}>Done</option>
+                        <option value="To Do" @selected(old('status', strtolower($solution->status)) == 'to do') >To Do</option>
+                        <option value="Doing" @selected(old('status', strtolower($solution->status)) == 'doing') >Doing</option>
+                        <option value="Done" @selected(old('status', strtolower($solution->status)) == 'done') >Done</option>
                     </x-forms.select>
     
                     <x-forms.input name="description" value="{{ $solution->description }}"/>

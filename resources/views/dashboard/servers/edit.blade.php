@@ -12,15 +12,15 @@
 
                     <x-forms.select name="server_type" labelName="Server Type">
                         <option disabled>Choose Server Type</option>
-                        <option value="Physical" {{ strtolower(old('server_type')) === 'physical' ? 'selected' : '' }}>Physical</option>
-                        <option value="Virtual" {{ strtolower(old('server_type')) === 'virtual' ? 'selected' : '' }}>Virtual</option>
+                        <option value="Physical" @selected(old('server_type', strtolower($server->server_type)) == 'physical') >Physical</option>
+                        <option value="Virtual" @selected(old('server_type', strtolower($server->server_type)) == 'virtual') >Virtual</option>
                     </x-forms.select>
 
                     <x-forms.select name="status" labelName="Status">
                         <option disabled>Choose Status</option>
-                        <option value="Active" {{ strtolower(old('server_type')) === 'active' ? 'selected' : '' }}>Active</option>
-                        <option value="Non Active" {{ strtolower(old('server_type')) === 'non active' ? 'selected' : '' }}>Non Active</option>
-                        <option value="Suspend" {{ strtolower(old('server_type')) === 'suspend' ? 'selected' : '' }}>Suspend</option>
+                        <option value="Active" @selected(old('status', strtolower($server->status)) == 'active') >Active</option>
+                        <option value="Non Active" @selected(old('status', strtolower($server->status)) == 'no active') >Non Active</option>
+                        <option value="Suspend" @selected(old('status', strtolower($server->status)) == 'suspend') >Suspend</option>
                     </x-forms.select>
 
 
