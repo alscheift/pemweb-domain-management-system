@@ -170,7 +170,6 @@ class DomainController extends Controller
             'application_type' => 'required',
             'port' => 'required|numeric|min:1',
             'server_id' => 'required',
-            'user_id' => 'required'
         ]);
 
         $domain->update([
@@ -181,7 +180,6 @@ class DomainController extends Controller
             'port' => $attributes['port'],
             'server_id' => $attributes['server_id'],
             'http_status' => $http_status,
-            'user_id' => $attributes['user_id']
         ]);
 
         $domainId = $domain->id;
