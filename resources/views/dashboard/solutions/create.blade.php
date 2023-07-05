@@ -10,9 +10,9 @@
                   <x-forms.select name="notification_id" labelName="Domain Name">
                      <option selected>Choose Notification</option>
                      @foreach($notifications as $notification)
-                        @if($notification->domain->user_id != auth()->user()->id)
+                        {{-- @if($notification->domain->user_id != auth()->user()->id)
                            @continue
-                        @endif
+                        @endif --}}
                         <option value="{{$notification->id}}" {{ old('notification_id') == $notification->id ? 'selected' : '' }}>{{$notification->domain->name}}</option>
                      @endforeach
                   </x-forms.select>
