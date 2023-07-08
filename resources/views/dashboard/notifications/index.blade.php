@@ -19,9 +19,9 @@
                                         <x-table.th>Progress</x-table.th>
                                         <x-table.th>Date of Notification</x-table.th>
                                         @can('admin')
-                                        <x-table.th>
-                                            <span class="sr-only">Actions</span>
-                                        </x-table.th>
+                                            <x-table.th>
+                                                <span class="sr-only">Actions</span>
+                                            </x-table.th>
                                         @endcan
                                     </tr>
                                 </x-slot>
@@ -36,7 +36,7 @@
                                             <x-table.td>{{ $notification->description }}</x-table.td>
                                             <x-table.td>
                                                 @if ($notification->is_done)
-                                                    <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 dark:bg-green-700 dark:text-green-100">Done</span>    
+                                                    <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 dark:bg-green-700 dark:text-green-100">Done</span>
                                                 @else
                                                     <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 dark:bg-red-700 dark:text-red-100">Not Done</span>
                                                 @endif
@@ -44,14 +44,15 @@
                                             <x-table.td>{{ $notification->created_at }}</x-table.td>
 
                                             @can('admin')
-                                            <x-table.actions>
-                                                @if($notification->is_done == '0')
-                                                <x-table.btn-update
-                                                    route="{{ route('notifications.update', $notification->getRouteKey()) }}/edit" />
-                                                @endif
-                                                <x-table.btn-delete
-                                                    route="{{ route('notifications.destroy', $notification->getRouteKey()) }}" />
-                                            </x-table.actions>
+                                                <x-table.actions>
+                                                    @if($notification->is_done == '0')
+                                                        <x-table.btn-update
+                                                            route="{{ route('notifications.update', $notification->getRouteKey()) }}/edit"/>
+                                                    @endif
+                                                    <x-table.btn-delete
+                                                        text="{{ $notification->description}} ({{$notification->server_name}})"
+                                                        route="{{ route('notifications.destroy', $notification->getRouteKey()) }}"/>
+                                                </x-table.actions>
                                             @endcan
                                         </tr>
                                     @endforeach
@@ -85,14 +86,14 @@
                 @endif
             </div>
             @can('admin')
-            <div class="p-4 ml-auto">
-                <a href="{{ route('notifications.create') }}">
-                    <button
-                        class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600">
-                        Add Notification
-                    </button>
-                </a>
-            </div>
+                <div class="p-4 ml-auto">
+                    <a href="{{ route('notifications.create') }}">
+                        <button
+                            class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600">
+                            Add Notification
+                        </button>
+                    </a>
+                </div>
             @endcan
         </div>
     </div>

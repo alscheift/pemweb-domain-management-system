@@ -36,6 +36,7 @@
                                                 <x-table.btn-update
                                                     route="{{route('units.update',$unit->getRouteKey())}}/edit"/>
                                                 <x-table.btn-delete
+                                                    text="{{$unit->name.'('.$unit->higher_domain.')'}}"
                                                     route="{{route('units.destroy',$unit->getRouteKey())}}"/>
                                             </x-table.actions>
                                         </tr>

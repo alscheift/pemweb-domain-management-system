@@ -1,5 +1,5 @@
 <x-layouts.dashboard>
-    <x-partials.form />
+    <x-partials.form/>
 
     <div class="py-4 flex flex-col">
         <section class="container mx-auto">
@@ -19,9 +19,9 @@
                                         <x-table.th>Target Date</x-table.th>
                                         <x-table.th>Date of Solution</x-table.th>
                                         @can('pic')
-                                        <th scope="col" class="relative py-3.5 px-4">
-                                            <span class="sr-only">Actions</span>
-                                        </th>
+                                            <th scope="col" class="relative py-3.5 px-4">
+                                                <span class="sr-only">Actions</span>
+                                            </th>
                                         @endcan
                                     </tr>
                                 </x-slot>
@@ -46,7 +46,7 @@
                                             @if($solution->date_of_solution)
                                                 <x-table.td>{{ $solution->date_of_solution }}</x-table.td>
                                             @else
-                                                <x-table.td> - </x-table.td>
+                                                <x-table.td> -</x-table.td>
                                             @endif
 
                                             <x-table.actions>
@@ -54,7 +54,7 @@
                                                     @if ($solution->notification_is_done == '0')
                                                         {{-- <form method="POST" action="{{ route('solutions.done', $solution) }}">
                                                             @csrf
-                                                            
+
                                                             <button
                                                                 class="text-green-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-green-300 hover:text-indigo-500 focus:outline-none">
                                                                 Marks As Done
@@ -62,13 +62,13 @@
                                                         </form> --}}
 
                                                         <x-table.btn-done
-                                                            route="{{ route('solutions.done', $solution) }}" />
+                                                            route="{{ route('solutions.done', $solution) }}"/>
 
                                                         <x-table.btn-update
-                                                            route="{{ route('solutions.update', $solution->getRouteKey()) }}/edit" />
+                                                            route="{{ route('solutions.update', $solution->getRouteKey()) }}/edit"/>
                                                     @endif
-                                                    <x-table.btn-delete text="{{ $solution->url }}"
-                                                        route="{{ route('solutions.destroy', $solution->getRouteKey()) }}" />
+                                                    <x-table.btn-delete text="{{ $solution->notification->domain->url }}"
+                                                                        route="{{ route('solutions.destroy', $solution->getRouteKey()) }}"/>
                                                 @endcan
                                             </x-table.actions>
                                         </tr>
@@ -79,7 +79,7 @@
                     </div>
                 </div>
             @else
-                <x-partials.nofound message="No solutions found..." />
+                <x-partials.nofound message="No solutions found..."/>
             @endif
         </section>
         <div class="grid grid-cols-2 gap-5 mt-5">

@@ -32,6 +32,7 @@
                                                 <x-table.btn-update
                                                     route="{{route('users.update',$user->getRouteKey())}}/edit"/>
                                                 <x-table.btn-delete
+                                                    text="{{$user->name}} ({{$user->unit->name??'Admin'}}/{{$user->username}})"
                                                     route="{{route('users.destroy',$user->getRouteKey())}}"/>
                                             </x-table.actions>
                                         </tr>

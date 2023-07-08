@@ -21,9 +21,9 @@
                                         <x-table.th>Domain Count</x-table.th>
                                         <x-table.th>Unit</x-table.th>
                                         @can('pic')
-                                        <x-table.th>
-                                            <span class="sr-only">Actions</span>
-                                        </x-table.th>
+                                            <x-table.th>
+                                                <span class="sr-only">Actions</span>
+                                            </x-table.th>
                                         @endcan
                                     </tr>
                                 </x-slot>
@@ -47,12 +47,13 @@
                                             <x-table.td>{{$server->domains->count()}}</x-table.td>
                                             <x-table.td>{{$server->unit->name}}</x-table.td>
                                             @can('pic')
-                                            <x-table.actions>
-                                                <x-table.btn-update
-                                                    route="{{route('servers.update',$server->getRouteKey())}}/edit"/>
-                                                <x-table.btn-delete
-                                                    route="{{route('servers.destroy',$server->getRouteKey())}}"/>
-                                            </x-table.actions>
+                                                <x-table.actions>
+                                                    <x-table.btn-update
+                                                        route="{{route('servers.update',$server->getRouteKey())}}/edit"/>
+                                                    <x-table.btn-delete
+                                                        text="{{$server->name}}"
+                                                        route="{{route('servers.destroy',$server->getRouteKey())}}"/>
+                                                </x-table.actions>
                                             @endcan
                                         </tr>
                                     @endforeach
@@ -65,7 +66,7 @@
                 <x-partials.nofound message="No servers found..."/>
             @endif
         </section>
-        
+
         <div class="grid grid-cols-2 gap-5 mt-5">
             <div class="p-4 mr-auto">
                 @if ($servers->currentPage() > 1)
@@ -85,14 +86,14 @@
                 @endif
             </div>
             @can('pic')
-            <div class="p-4 ml-auto">
-                <a href="{{route('servers.create')}}">
-                    <button
-                        class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
-                        Add Server
-                    </button>
-                </a>
-            </div>
+                <div class="p-4 ml-auto">
+                    <a href="{{route('servers.create')}}">
+                        <button
+                            class="px-6 py-2 font-medium text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded hover:bg-blue-600 ">
+                            Add Server
+                        </button>
+                    </a>
+                </div>
             @endcan
         </div>
     </div>
