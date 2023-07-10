@@ -2,7 +2,7 @@
     <div class="flex h-screen">
         <div class="w-full max-w-sm p-6 m-auto mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800">
             <div class="flex justify-center mx-auto">
-                <img class="w-auto h-7 sm:h-8" src="https://merakiui.com/images/logo.svg" alt="">
+                <img class="w-auto h-10 sm:h-8" src="{{ asset('img/logo.png') }}" alt="Logo Domains Master">
             </div>
 
             <form action="/login" method="POST" class="mt-6">
