@@ -1,9 +1,6 @@
-# DomainMS | Domain Management System
+# Domain-MS | Domain Management System
 
-## Choose Language
-[Bahasa Indonesia](README-ID.md) | [English](README.md)
-
-DomainMS is a domain management application system built using Laravel. This application provides features to facilitate the management of user, unit, server, domain, notification of domain, and solution of notification.
+Domain-MS is a domain management application system built using Laravel. This application provides features to facilitate the management of user, unit, server, domain, notification of domain, and solution of notification.
 
 ## 🌟 Features
 
@@ -20,7 +17,7 @@ DomainMS is a domain management application system built using Laravel. This app
 
 ## ⚙️ Installation
 
-Here are the steps to install DomainMS on your local environment:
+Here are the steps to install Domain-MS on your local environment:
 
 1. Clone this repository to your local directory:
 
@@ -83,11 +80,11 @@ php artisan serve
 ```
 npm run dev
 ```
-11. Open your browser and access `http://localhost:8000` to see the DomainMS application.
+11. Open your browser and access `http://localhost:8000` to see the Domain-MS application.
 
 ## 🙌 Credits
 
-DomainMS is built using several resources and libraries, including:
+Domain-MS is built using several resources and libraries, including:
 
 - [Laravel](https://laravel.com)
 - [Faker](https://fakerphp.github.io)
