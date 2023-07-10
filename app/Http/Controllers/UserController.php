@@ -43,7 +43,7 @@ class UserController extends Controller
             'unit_id' => 'required',
             'is_admin' => 'required'
         ]);
-        
+
         if ($attributes['is_admin'] == '1') {
             $attributes['unit_id'] = null;
         }
@@ -92,7 +92,7 @@ class UserController extends Controller
 
     public function destroy(User $user): RedirectResponse
     {
-        if($user->domains()->exists()){
+        if ($user->domains()->exists()) {
             return redirect(route('users'))->with('error', 'User cannot be deleted because it has domains');
         }
 
@@ -106,13 +106,20 @@ class UserController extends Controller
         return view('profile.index', compact('user'));
     }
 
-    public function profileEdit(User $user): View
+    public function profileEdit(User $user): View|RedirectResponse
     {
+        if ($user->id != auth()->user()->id) {
+            return redirect(route('403'))->with('error', 'You cannot edit other user profile');
+        }
         return view('profile.edit', compact('user'));
     }
 
     public function profileUpdate(User $user): RedirectResponse
     {
+        if ($user->id != auth()->user()->id) {
+            return redirect(route('403'))->with('error', 'You cannot edit other user profile');
+        }
+
         $attributes = request()->validate([
             'name' => 'required',
             'username' => 'required',
