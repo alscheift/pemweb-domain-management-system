@@ -11,10 +11,13 @@ class PICOnly
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (auth()->user()->cannot('pic')) {
+            return redirect()->route('403');
+        }
         return $next($request);
     }
 }
