@@ -100,3 +100,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/{user}/edit', [UserController::class, 'profileEdit'])->name('profile.edit');
     Route::patch('/profile/{user}', [UserController::class, 'profileUpdate'])->name('profile.update');
 });
+
+// Others
+// 403
+Route::get('403', function () {
+    return view('dashboard.403');
+})->name('403');
