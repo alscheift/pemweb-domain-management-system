@@ -4,7 +4,6 @@ namespace App\Http;
 
 use App\Http\Middleware\AdminOnly;
 use App\Http\Middleware\PICOnly;
-use App\Http\Middleware\UserOwnsUnit;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -68,7 +67,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
         // Custom middleware
-        'userownsunit' => UserOwnsUnit::class,
         'admin' => AdminOnly::class,
         'pic' => PICOnly::class
     ];
