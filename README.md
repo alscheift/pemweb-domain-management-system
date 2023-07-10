@@ -1,66 +1,103 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# DomainMS | Domain Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Choose Language
+[Bahasa Indonesia](README-ID.md) | [English](README.md)
 
-## About Laravel
+DomainMS is a domain management application system built using Laravel. This application provides features to facilitate the management of user, unit, server, domain, notification of domain, and solution of notification.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🌟 Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Login**: Login feature that allows admins and pic units to log into the system.
+- **Logout**: Logout feature that allows admins and pic units to log out of the system.
+- **User Management**: Feature for admins to add new user data, edit existing user data, and delete unwanted user data.
+- **Unit Management**: Feature for admins to add new unit data, edit existing unit data, and delete unwanted unit data.
+- **Server Management**: Feature for pic units to add new server data, edit existing server data, and delete unwanted server data.
+- **Domain Management**: Feature for pic units to add new domain data, edit existing domain data, and delete unwanted domain data.
+- **Notification Management**: Feature for admins to add new notification data, edit existing notification data, and delete unwanted notification data.
+- **Solution of Notification Management**: Feature for pic units to add new solution (notification's response) data, edit existing solution (notification's response) data, and delete unwanted solution (notification's response) data.
+- **Report Domain**: Feature for admins and pic units to view the reports of all domains based on their http status.
+- **Profile Editing**: Feature that allows admins and pic units to view and modify profile information such as name, username, email, and password.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## ⚙️ Installation
 
-## Learning Laravel
+Here are the steps to install DomainMS on your local environment:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Clone this repository to your local directory:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```
+git clone https://github.com/alscheift/pemweb-domain-management-system.git
+```
+or download this repository as a zip file.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2. Navigate to the project directory:
 
-## Laravel Sponsors
+```
+cd pemweb-domain-management-system
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+3. Copy the `.env.example` file to `.env`:
 
-### Premium Partners
+```
+cp .env.example .env
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+4. Set up the database configuration in the `.env` file according to your environment.
 
-## Contributing
+5. Run the following command to install PHP dependencies:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+composer install
+```
 
-## Code of Conduct
+6. Generate the application key:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+php artisan key:generate
+```
 
-## Security Vulnerabilities
+7. Activate GD and Fileinfo Extensions:
+- Open your `php.ini` file in your php directory.
+- Uncomment the lines for the GD extension and the Fileinfo extension by removing the semicolon (;) at the beginning of the lines.
+    ```ini
+    extension=gd
+    extension=fileinfo
+    ```
+- Save the changes to the `php.ini` file.
+- This step is used to enable base64 in print-approval pdf.
+- Restart your web server to apply the changes.Run migrations and seed data:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+8. Run migrations and seed data:
 
-## License
+```
+php artisan migrate --seed
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+9. Start the Laravel development server:
+
+```
+php artisan serve
+```
+
+10. Start the project development in `package.json`:
+
+```
+npm run dev
+```
+11. Open your browser and access `http://localhost:8000` to see the DomainMS application.
+
+## 🙌 Credits
+
+DomainMS is built using several resources and libraries, including:
+
+- [Laravel](https://laravel.com)
+- [Faker](https://fakerphp.github.io)
+- [Laravel Excel](https://laravel-excel.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Flowbite](https://flowbite.com/)
+
+## 👨‍💻 Developer Team
+
+- [Arya Surya Baskara](https://github.com/Aryaaw)
+- [Afif Nur Fauzi](https://github.com/alscheift)
+- [Dafina Nazhifah](https://github.com/dafinanz)
+- [Hafidh Muhammad Akbar](https://github.com/hafidhmuhammadakbar)
