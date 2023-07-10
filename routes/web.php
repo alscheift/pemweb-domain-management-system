@@ -37,38 +37,47 @@ Route::post('logout', [SessionsController::class, 'destroy']);
 Route::get('test', [SessionsController::class, 'test']);
 
 Route::middleware('auth')->group(function () {
-    // Users
-    Route::get('/users', [UserController::class, 'index'])->middleware('can:admin')->name('users');
-    Route::get('/users/create', [UserController::class, 'create'])->middleware('can:admin')->name('users.create');
-    Route::post('/users', [UserController::class, 'store'])->middleware('can:admin')->name('users.store');
-    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->middleware('can:admin')->name('users.edit');
-    Route::patch('/users/{user}', [UserController::class, 'update'])->middleware('can:admin')->name('users.update');
-    Route::delete('/users/{user}', [UserController::class, 'destroy'])->middleware('can:admin')->name('users.destroy');
+    Route::middleware('admin')->group(function () {
+        // Users
+        Route::get('/users', [UserController::class, 'index'])->name('users');
+        Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+        Route::post('/users', [UserController::class, 'store'])->name('users.store');
+        Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+        Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');
+        Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
-    // Units
-    Route::get('/units', [UnitController::class, 'index'])->middleware('can:admin')->name('units');
-    Route::get('/units/create', [UnitController::class, 'create'])->middleware('can:admin')->name('units.create');
-    Route::post('/units', [UnitController::class, 'store'])->middleware('can:admin')->name('units.store');
-    Route::get('/units/{unit}/edit', [UnitController::class, 'edit'])->middleware('can:admin')->name('units.edit');
-    Route::patch('/units/{unit}', [UnitController::class, 'update'])->middleware('can:admin')->name('units.update');
-    Route::delete('/units/{unit}', [UnitController::class, 'destroy'])->middleware('can:admin')->name('units.destroy');
+        // Units
+        Route::get('/units', [UnitController::class, 'index'])->name('units');
+        Route::get('/units/create', [UnitController::class, 'create'])->name('units.create');
+        Route::post('/units', [UnitController::class, 'store'])->name('units.store');
+        Route::get('/units/{unit}/edit', [UnitController::class, 'edit'])->name('units.edit');
+        Route::patch('/units/{unit}', [UnitController::class, 'update'])->name('units.update');
+        Route::delete('/units/{unit}', [UnitController::class, 'destroy'])->name('units.destroy');
+    });
+
 
     // Servers
     Route::get('/servers', [ServerController::class, 'index'])->name('servers');
-    Route::get('/servers/create', [ServerController::class, 'create'])->middleware('can:pic')->name('servers.create');
-    Route::post('/servers', [ServerController::class, 'store'])->middleware('can:pic')->name('servers.store');
-    Route::get('/servers/{server}/edit', [ServerController::class, 'edit'])->middleware('can:pic')->name('servers.edit');
-    Route::patch('/servers/{server}', [ServerController::class, 'update'])->middleware('can:pic')->name('servers.update');
-    Route::delete('/servers/{server}', [ServerController::class, 'destroy'])->middleware('can:pic')->name('servers.destroy');
+
+    Route::middleware('pic')->group(function () {
+        Route::get('/servers/create', [ServerController::class, 'create'])->name('servers.create');
+        Route::post('/servers', [ServerController::class, 'store'])->name('servers.store');
+        Route::get('/servers/{server}/edit', [ServerController::class, 'edit'])->name('servers.edit');
+        Route::patch('/servers/{server}', [ServerController::class, 'update'])->name('servers.update');
+        Route::delete('/servers/{server}', [ServerController::class, 'destroy'])->name('servers.destroy');
+    });
 
     // Domains
     Route::get('/domains', [DomainController::class, 'index'])->name('domains');
-    Route::get('/domains/create', [DomainController::class, 'create'])->middleware('can:pic')->name('domains.create');
-    Route::post('/domains', [DomainController::class, 'store'])->middleware('can:pic')->name('domains.store');
-    Route::get('/domains/{domain}/edit', [DomainController::class, 'edit'])->middleware('can:pic')->name('domains.edit');
-    Route::patch('/domains/{domain}', [DomainController::class, 'update'])->middleware('can:pic')->name('domains.update');
-    Route::delete('/domains/{domain}', [DomainController::class, 'destroy'])->middleware('can:pic')->name('domains.destroy');
     Route::get('/domains/{domain}', [DomainController::class, 'show'])->name('domains.show');
+
+    Route::middleware('pic')->group(function () {
+        Route::get('/domains/create', [DomainController::class, 'create'])->name('domains.create');
+        Route::post('/domains', [DomainController::class, 'store'])->name('domains.store');
+        Route::get('/domains/{domain}/edit', [DomainController::class, 'edit'])->name('domains.edit');
+        Route::patch('/domains/{domain}', [DomainController::class, 'update'])->name('domains.update');
+        Route::delete('/domains/{domain}', [DomainController::class, 'destroy'])->name('domains.destroy');
+    });
 
     // Route::get('/domains/export-excel', [DomainController::class, 'viewExcel'])->name('domains.export');
 
@@ -76,20 +85,26 @@ Route::middleware('auth')->group(function () {
 
     // Notifications
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
-    Route::get('/notifications/create', [NotificationController::class, 'create'])->middleware('can:admin')->name('notifications.create');
-    Route::post('/notifications', [NotificationController::class, 'store'])->middleware('can:admin')->name('notifications.store');
-    Route::get('/notifications/{notification}/edit', [NotificationController::class, 'edit'])->middleware('can:admin')->name('notifications.edit');
-    Route::patch('/notifications/{notification}', [NotificationController::class, 'update'])->middleware('can:admin')->name('notifications.update');
-    Route::delete('/notifications/{notification}', [NotificationController::class, 'destroy'])->middleware('can:admin')->name('notifications.destroy');
+
+    Route::middleware('admin')->group(function () {
+        Route::get('/notifications/create', [NotificationController::class, 'create'])->name('notifications.create');
+        Route::post('/notifications', [NotificationController::class, 'store'])->name('notifications.store');
+        Route::get('/notifications/{notification}/edit', [NotificationController::class, 'edit'])->name('notifications.edit');
+        Route::patch('/notifications/{notification}', [NotificationController::class, 'update'])->name('notifications.update');
+        Route::delete('/notifications/{notification}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
+    });
 
     // Solutions
     Route::get('/solutions', [SolutionController::class, 'index'])->name('solutions');
-    Route::get('/solutions/create', [SolutionController::class, 'create'])->middleware('can:pic')->name('solutions.create');
-    Route::post('/solutions', [SolutionController::class, 'store'])->middleware('can:pic')->name('solutions.store');
-    Route::get('/solutions/{solution}/edit', [SolutionController::class, 'edit'])->middleware('can:pic')->name('solutions.edit');
-    Route::patch('/solutions/{solution}', [SolutionController::class, 'update'])->middleware('can:pic')->name('solutions.update');
-    Route::post('/solutions/{solution}', [SolutionController::class, 'marksAsDone'])->middleware('can:pic')->name('solutions.done');
-    Route::delete('/solutions/{solution}', [SolutionController::class, 'destroy'])->middleware('can:pic')->name('solutions.destroy');
+
+    Route::middleware('pic')->group(function () {
+        Route::get('/solutions/create', [SolutionController::class, 'create'])->name('solutions.create');
+        Route::post('/solutions', [SolutionController::class, 'store'])->name('solutions.store');
+        Route::get('/solutions/{solution}/edit', [SolutionController::class, 'edit'])->name('solutions.edit');
+        Route::patch('/solutions/{solution}', [SolutionController::class, 'update'])->name('solutions.update');
+        Route::post('/solutions/{solution}', [SolutionController::class, 'marksAsDone'])->name('solutions.done');
+        Route::delete('/solutions/{solution}', [SolutionController::class, 'destroy'])->name('solutions.destroy');
+    });
 
     // Reports
     Route::get('/reports', [ReportController::class, 'index'])->name('reports');
@@ -105,4 +120,4 @@ Route::middleware('auth')->group(function () {
 // 403
 Route::get('403', function () {
     return view('dashboard.403');
-})->name('403');
+})->middleware('auth')->name('403');
