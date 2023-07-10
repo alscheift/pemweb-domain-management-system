@@ -13,7 +13,7 @@
             <img class="object-cover w-full rounded-t-lg h-90 md:rounded-none md:w-w" src="{{ asset('img/dashboard-image.png') }}" alt="dashboard">
             <div class="flex flex-col text-center justify-between p-4 leading-normal">
                 <h5 class="mb-1 text-xl font-bold tracking-tight text-gray-900 dark:text-white">Welcome to Domain Management System</h5>
-                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Tugas Besar Pemrograman Web 2023 Kelas A Kelompok 2</p>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Simplify, Organize, Succeed: Domains Managed Right.</p>
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-center mt-4">
