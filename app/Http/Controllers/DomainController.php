@@ -54,8 +54,13 @@ class DomainController extends Controller
         return view('dashboard.domains.index', compact('domains'));
     }
 
-    public function show(Domain $domain): View
+    public function show(Domain $domain): View|RedirectResponse
     {
+        if (auth()->user()->cannot('admin')) {
+            if (auth()->user()->cannot('auth-domains', $domain)) {
+                return redirect()->route('403');
+            }
+        }
         $domainImages = DomainImages::where('domain_id', $domain->id)->first();
 
         return view('dashboard.domains.show', compact('domain', 'domainImages'));
