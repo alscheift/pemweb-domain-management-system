@@ -202,7 +202,7 @@ class DomainController extends Controller
                 'images' => $images_upload['images'],
             ]);
 
-            if ($imagePath) {
+            if ($imagePath != "domain_images/default-image.png") {
                 Storage::delete($imagePath);
             }
             // delete old image
