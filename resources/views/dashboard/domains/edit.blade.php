@@ -8,6 +8,16 @@
                 @method('patch')
 
                 <div class="grid grid-cols-1 gap-6 mt-4">
+                    <x-forms.select name="user_id" labelName="Penanggung Jawab">
+                        <option disabled>Pilih PIC Unit</option>
+                        @foreach(auth()->user()->unit->users as $user)
+                            <option @selected(old('user_id', $domain->user->id)==$user->id)
+                                    value="{{$user->id}}">
+                                {{$user->name.' ('.$user->username.')'}}
+                            </option>
+                        @endforeach
+                    </x-forms.select>
+
                     <x-forms.input name="name" value="{{old('name',$domain->name)}}"/>
                     <x-forms.input name="url" value="{{old('url',$domain->url)}}" labelName="URL"/>
                     <x-forms.input name="description" value="{{old('description',$domain->description)}}"/>
@@ -21,8 +31,8 @@
                                 @continue
                             @endif
                             @if($server->status == 'Active')
-                                <option value="{{$server->id}}" @selected(old('server_id', $domain->server_id) == $server->id ) > 
-                                    {{$server->name.' ('.$server->unit->name.')'}} 
+                                <option value="{{$server->id}}" @selected(old('server_id', $domain->server_id) == $server->id ) >
+                                    {{$server->name.' ('.$server->unit->name.')'}}
                                 </option>
                             @endif
                         @endforeach
