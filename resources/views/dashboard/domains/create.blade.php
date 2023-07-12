@@ -6,9 +6,19 @@
             <form method="POST" action="{{route('domains.store')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="grid grid-cols-1 gap-6 mt-4">
-                    <div class="hidden">
-                        <input id="user_id" name="user_id" value="{{auth()->user()->id}}"/>
-                    </div>
+                    {{--                    <div class="hidden">--}}
+                    {{--                        <input id="user_id" name="user_id" value="{{auth()->user()->id}}"/>--}}
+                    {{--                    </div>--}}
+
+                    <x-forms.select name="user_id" labelName="Penanggung Jawab">
+                        <option selected>Pilih PIC Unit</option>
+                        @foreach(auth()->user()->unit->users as $user)
+                            <option @selected(old('user_id')==$user->id)
+                                    value="{{$user->id}}">
+                                {{$user->name.' ('.$user->username.')'}}
+                            </option>
+                        @endforeach
+                    </x-forms.select>
 
                     <x-forms.input name="name"/>
                     <x-forms.input name="url" labelName="URL"/>
@@ -22,7 +32,7 @@
                             @if($server->status == 'Active')
                                 <option @selected(old('server_id')==$server->id)
                                         value="{{$server->id}}">
-                                        {{$server->name.' ('.$server->unit->name.')'}}
+                                    {{$server->name.' ('.$server->unit->name.')'}}
                                 </option>
                             @endif
                         @endforeach
@@ -34,8 +44,8 @@
                             <img class="img-preview w-full h-auto mb-4">
                         </div>
                         <input id="images" name="images" onchange="previewImage()"
-                            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" 
-                            id="file_input" type="file">
+                               class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                               id="file_input" type="file">
                     </div>
 
                 </div>

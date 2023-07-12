@@ -12,6 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
 
@@ -85,6 +86,12 @@ class DomainController extends Controller
             'user_id' => 'required',
             'images' => 'nullable|image', // Include 'images' validation rule here
         ]);
+
+        if (!is_numeric($attributes['user_id'])) {
+            throw ValidationException::withMessages([
+                'user_id' => 'Please select PIC Unit',
+            ]);
+        }
 
         $domain = Domain::create([
             'url' => $attributes['url'],
