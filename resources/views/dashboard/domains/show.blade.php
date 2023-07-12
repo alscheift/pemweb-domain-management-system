@@ -47,11 +47,11 @@
                                     </tr>
                                     <tr>
                                         <x-table.th>Server Name</x-table.th>
-                                        <x-table.td>{{ \App\Models\Server::where('id', $domain->server_id)->first()->name }}</x-table.td>
+                                        <x-table.td>{{ $domain->server->name }}</x-table.td>
                                     </tr>
                                     <tr>
                                         <x-table.th>Penanggung Jawab</x-table.th>
-                                        <x-table.td>{{ \App\Models\User::where('id', $domain->user_id)->first()->name }}</x-table.td>
+                                        <x-table.td>{{ $domain->user->name . '( ' .$domain->user->phone . ' )' }}</x-table.td>
                                     </tr>
                                 </x-slot>
                             </x-table>
@@ -59,7 +59,7 @@
                     </div>
                 </div>
             @else
-                <x-partials.nofound message="No domains found..." />
+                <x-partials.nofound message="No domains found..."/>
             @endif
         </section>
     </div>
